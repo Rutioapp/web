@@ -1,4 +1,4 @@
-import type { LandingContent } from "@/types/landing";
+﻿import type { LandingContent } from "@/types/landing";
 
 export const landingContent = {
   announcement: "Beta privada 2026 · Plazas limitadas para iPhone y iPad.",
@@ -46,7 +46,7 @@ export const landingContent = {
       }
     ],
     socialProof: {
-      summary: "+200 personas ya en lista de espera",
+      summary: "+30 personas ya en lista de espera",
       detail: "Plazas limitadas para la beta privada inicial.",
       avatars: [
         { name: "Alba M.", initials: "A", color: "122 158 126" },
@@ -205,12 +205,12 @@ export const landingContent = {
         "No solo deporte o meditación. Rutio cubre el espectro completo del crecimiento personal.",
       items: [
         { slug: "mente", emoji: "ME", label: "Mente", description: "Lectura, aprendizaje, foco", color: "124 107 174" },
-        { slug: "espiritu", emoji: "ES", label: "Espíritu", description: "Meditación, gratitud, calma", color: "91 143 168" },
+        { slug: "espiritu", emoji: "ES", label: "Espíritu", description: "Meditación, gratitud, calma", color: "106 158 127" },
         { slug: "cuerpo", emoji: "CU", label: "Cuerpo", description: "Ejercicio, nutrición, descanso", color: "201 112 72" },
-        { slug: "emocional", emoji: "EM", label: "Emocional", description: "Autoconocimiento, emociones", color: "212 116 140" },
-        { slug: "social", emoji: "SO", label: "Social", description: "Relaciones, comunidad", color: "107 158 107" },
-        { slug: "disciplina", emoji: "DI", label: "Disciplina", description: "Constancia, metas, orden", color: "139 115 85" },
-        { slug: "profesional", emoji: "PR", label: "Profesional", description: "Carrera, habilidades, red", color: "74 124 158" }
+        { slug: "emocional", emoji: "EM", label: "Emocional", description: "Autoconocimiento, emociones", color: "196 104 122" },
+        { slug: "social", emoji: "SO", label: "Social", description: "Relaciones, comunidad", color: "90 143 173" },
+        { slug: "disciplina", emoji: "DI", label: "Disciplina", description: "Constancia, metas, orden", color: "192 154 58" },
+        { slug: "profesional", emoji: "PR", label: "Profesional", description: "Carrera, habilidades, red", color: "107 125 114" }
       ]
     },
     gamification: {
@@ -374,6 +374,9 @@ export const landingContent = {
     legal: "Rutio · Construye tu camino · Beta 2026"
   }
 } satisfies LandingContent;
+
+
+
 
 
 

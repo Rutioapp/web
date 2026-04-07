@@ -25,7 +25,7 @@ export function HeroDevicePreview() {
         <div className="relative overflow-hidden rounded-[2rem] bg-[#faf6ef] shadow-inset">
           <Image
             src={diarioScreenshot}
-            alt="Pantalla diaria de Rutio con lista de habitos para completar."
+            alt="Pantalla diaria de Rutio con lista de hábitos para completar."
             priority
             sizes="(min-width: 1024px) 304px, (min-width: 640px) 288px, 272px"
             className="h-auto w-full"
@@ -44,7 +44,7 @@ export function HeroDevicePreview() {
         <div className="overflow-hidden rounded-[1.5rem] border border-white/80 bg-[#f6efe3]">
           <Image
             src={semanalScreenshot}
-            alt="Pantalla semanal de Rutio con seguimiento de habitos durante la semana."
+            alt="Pantalla semanal de Rutio con seguimiento de hábitos durante la semana."
             sizes="(min-width: 1024px) 195px, 172px"
             className="h-auto w-full"
           />
@@ -91,4 +91,3 @@ export function HeroDevicePreview() {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import type { TestimonialItem } from "@/types/landing";
+﻿import type { TestimonialItem } from "@/types/landing";
 
 interface TestimonialCardProps {
   testimonial: TestimonialItem;
@@ -9,7 +9,9 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
     <article className="rounded-[1.6rem] border border-brand/12 bg-white p-6 shadow-soft">
       <div className="mb-4 flex gap-1 text-[#c9a84c]" aria-label="5 estrellas">
         {Array.from({ length: 5 }).map((_, index) => (
-          <span key={index}>?</span>
+          <span key={index} aria-hidden="true">
+            ★
+          </span>
         ))}
       </div>
       <blockquote className="font-display text-[1.18rem] italic leading-8 text-foreground">“{testimonial.quote}”</blockquote>

@@ -1,9 +1,11 @@
-import { landingContent } from "@/content/landing-content";
+﻿import { landingContent } from "@/content/landing-content";
 import { Container } from "@/components/ui/container";
 import { FamilyCard } from "@/components/sections/families/family-card";
 
 export function FamiliesSection() {
   const section = landingContent.sections.families;
+  const firstRow = section.items.slice(0, 4);
+  const secondRow = section.items.slice(4);
 
   return (
     <section id="familias" className="relative overflow-hidden bg-foreground py-20 sm:py-24 lg:py-28">
@@ -21,10 +23,18 @@ export function FamiliesSection() {
           <p className="mt-5 text-pretty text-base leading-8 text-background/50">{section.description}</p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
-          {section.items.map((family) => (
-            <FamilyCard key={family.slug} family={family} />
-          ))}
+        <div className="mt-12 space-y-4 sm:space-y-5 lg:space-y-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {firstRow.map((family) => (
+              <FamilyCard key={family.slug} family={family} />
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mx-auto lg:max-w-[calc(75%-0.75rem)] lg:grid-cols-3">
+            {secondRow.map((family) => (
+              <FamilyCard key={family.slug} family={family} />
+            ))}
+          </div>
         </div>
       </Container>
     </section>

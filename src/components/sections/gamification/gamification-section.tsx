@@ -1,7 +1,26 @@
-import { landingContent } from "@/content/landing-content";
+﻿import Image from "next/image";
+
+import rutioMonedaIcon from "@/assets/icons/rutio-moneda-bicolor.svg";
 import { Container } from "@/components/ui/container";
 import { AmberCard } from "@/components/sections/gamification/amber-card";
 import { StreakCard } from "@/components/sections/gamification/streak-card";
+import { landingContent } from "@/content/landing-content";
+
+const gamificationMetrics = [
+  {
+    shortLabel: "XP",
+    title: "Puntos de experiencia",
+    description: "Completa hábitos, sube de nivel y desbloquea avances sin fricción."
+  },
+  {
+    shortLabel: "AM",
+    title: "Moneda Ámbar",
+    description: "Gana Ámbar al cumplir hábitos y rachas, y úsalo para personalizar la app."
+  }
+] as const;
+
+const gamificationDescription =
+  "Rachas, XP y Ámbar convierten tu constancia en progreso visible y recompensas claras.";
 
 export function GamificationSection() {
   const section = landingContent.sections.gamification;
@@ -13,12 +32,19 @@ export function GamificationSection() {
           <div className="order-2 space-y-4 lg:order-1">
             <AmberCard />
             <StreakCard />
-            <div className="img-placeholder-shell min-h-28 bg-white/45">
-              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brand-strong">Moneda Ámbar</p>
-              <h3 className="mt-3 text-xl leading-7 text-foreground">Sistema de recompensa sereno y claro</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Diseño pensado para sentirse premium y motivador, sin caer en una estética infantilizada.
-              </p>
+
+            <div className="surface-card surface-glow flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:p-6">
+              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-[1.8rem] bg-foreground shadow-soft">
+                <Image src={rutioMonedaIcon} alt="Moneda Ámbar de Rutio" width={76} height={76} className="h-[4.75rem] w-[4.75rem]" />
+              </div>
+
+              <div>
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-strong">Moneda Ámbar</p>
+                <h3 className="mt-3 text-xl leading-7 text-foreground">Una recompensa simple y visible</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  La ganas con tus hábitos diarios y la gastas en personalizar la experiencia.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -31,13 +57,13 @@ export function GamificationSection() {
               <span className="block">{section.title}</span>
               {section.highlight ? <em className="block font-normal italic text-brand">{section.highlight}</em> : null}
             </h2>
-            <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{section.description}</p>
+            <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{gamificationDescription}</p>
 
             <div className="mt-10 space-y-7">
-              {section.metrics.map((metric, index) => (
+              {gamificationMetrics.map((metric, index) => (
                 <article
                   key={metric.title}
-                  className={index === section.metrics.length - 1 ? "flex gap-4" : "flex gap-4 border-b border-brand/12 pb-7"}
+                  className={index === gamificationMetrics.length - 1 ? "flex gap-4" : "flex gap-4 border-b border-brand/12 pb-7"}
                 >
                   <span className="w-12 flex-shrink-0 font-display text-[1.9rem] font-light leading-none text-[#c9a84c]/55">{metric.shortLabel}</span>
                   <div>

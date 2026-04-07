@@ -15,35 +15,35 @@ interface ScreenshotCard {
 }
 
 const featuredScreenshot: ScreenshotCard = {
-  eyebrow: "Estadisticas",
+  eyebrow: "Estadísticas",
   title: "Seguimiento visual que invita a volver",
   description:
-    "Rutio muestra progreso, consistencia y rachas en una pantalla clara para entender que esta funcionando sin perder el tono calido del producto.",
+    "Rutio muestra progreso, consistencia y rachas en una pantalla clara para entender qué está funcionando sin perder el tono cálido del producto.",
   image: estadisticasScreenshot,
-  alt: "Pantalla de estadisticas de Rutio con progreso semanal, consistencia y racha actual."
+  alt: "Pantalla de estadísticas de Rutio con progreso semanal, consistencia y racha actual."
 };
 
 const secondaryScreenshots: ScreenshotCard[] = [
   {
     eyebrow: "Diario",
-    title: "Tu dia, listo para actuar",
-    description: "Una lista directa de habitos para completar sin friccion, con progreso visible y acciones rapidas.",
+    title: "Tu día, listo para actuar",
+    description: "Una lista directa de hábitos para completar sin fricción, con progreso visible y acciones rápidas.",
     image: diarioScreenshot,
-    alt: "Pantalla diaria de Rutio con habitos organizados para el dia."
+    alt: "Pantalla diaria de Rutio con hábitos organizados para el día."
   },
   {
     eyebrow: "Semanal",
     title: "La semana entera, de un vistazo",
-    description: "Una cuadricula sencilla para detectar ritmo, huecos y constancia real durante los ultimos dias.",
+    description: "Una cuadrícula sencilla para detectar ritmo, huecos y constancia real durante los últimos días.",
     image: semanalScreenshot,
-    alt: "Pantalla semanal de Rutio con una cuadricula de habitos completados."
+    alt: "Pantalla semanal de Rutio con una cuadrícula de hábitos completados."
   },
   {
     eyebrow: "Mensual",
     title: "Perspectiva mensual sin perder foco",
-    description: "Calendario mensual para revisar avance, habitos activos y mejores rachas desde una vista mas amplia.",
+    description: "Calendario mensual para revisar avance, hábitos activos y mejores rachas desde una vista más amplia.",
     image: mensualScreenshot,
-    alt: "Pantalla mensual de Rutio con calendario y resumen de habitos."
+    alt: "Pantalla mensual de Rutio con calendario y resumen de hábitos."
   }
 ];
 

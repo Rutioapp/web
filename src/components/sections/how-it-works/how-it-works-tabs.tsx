@@ -33,33 +33,33 @@ const howItWorksSteps: HowItWorksStep[] = [
   {
     id: "create",
     stepLabel: "01",
-    eyebrow: "CREAR HABITO",
-    title: "Empieza con un habito claro",
+    eyebrow: "CREAR HÁBITO",
+    title: "Empieza con un hábito claro",
     description:
-      "Define una accion concreta, visible y facil de repetir para que el primer paso se sienta posible desde el primer dia.",
+      "Define una acción concreta, visible y fácil de repetir para que el primer paso se sienta posible desde el primer día.",
     image: diarioScreenshot,
-    alt: "Pantalla diaria de Rutio usada como placeholder temporal para la creacion de habitos.",
-    note: "Pendiente de sustituir por la pantalla exacta de creacion cuando la tengas."
+    alt: "Pantalla diaria de Rutio usada como placeholder temporal para la creación de hábitos.",
+    note: "Pendiente de sustituir por la pantalla exacta de creación cuando la tengas."
   },
   {
     id: "track",
     stepLabel: "02",
     eyebrow: "REGISTRAR PROGRESO",
-    title: "Marca avances sin friccion",
+    title: "Marca avances sin fricción",
     description:
-      "Completa tus habitos del dia y visualiza la semana en una vista clara para detectar ritmo, huecos y progreso real.",
+      "Completa tus hábitos del día y visualiza la semana en una vista clara para detectar ritmo, huecos y progreso real.",
     image: semanalScreenshot,
-    alt: "Pantalla semanal de Rutio con una cuadricula de seguimiento de habitos."
+    alt: "Pantalla semanal de Rutio con una cuadrícula de seguimiento de hábitos."
   },
   {
     id: "stats",
     stepLabel: "03",
-    eyebrow: "VER ESTADISTICAS",
-    title: "Entiende lo que si funciona",
+    eyebrow: "VER ESTADÍSTICAS",
+    title: "Entiende lo que sí funciona",
     description:
       "Consulta consistencia, rachas y porcentaje completado en una pantalla sobria que convierte tus datos en decisiones.",
     image: estadisticasScreenshot,
-    alt: "Pantalla de estadisticas de Rutio con progreso, consistencia y mejor racha."
+    alt: "Pantalla de estadísticas de Rutio con progreso, consistencia y mejor racha."
   },
   {
     id: "streak",
@@ -67,9 +67,9 @@ const howItWorksSteps: HowItWorksStep[] = [
     eyebrow: "MANTENER CONSTANCIA",
     title: "Convierte el impulso en rutina",
     description:
-      "Mira tu progreso mensual para mantener perspectiva, proteger tu racha y seguir construyendo habitos que duran.",
+      "Mira tu progreso mensual para mantener perspectiva, proteger tu racha y seguir construyendo hábitos que duran.",
     image: mensualScreenshot,
-    alt: "Pantalla mensual de Rutio con calendario, racha y resumen del habito activo."
+    alt: "Pantalla mensual de Rutio con calendario, racha y resumen del hábito activo."
   }
 ];
 
@@ -116,7 +116,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
 
         <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{description}</p>
 
-        <div className="mt-10" role="tablist" aria-label="Pasos de como funciona Rutio" aria-orientation="vertical">
+        <div className="mt-10" role="tablist" aria-label="Pasos de cómo funciona Rutio" aria-orientation="vertical">
           <div className="flex flex-col gap-3">
             {howItWorksSteps.map((step, index) => {
               const isActive = step.id === activeStep.id;

@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 
 import { mainNavigation } from "@/config/navigation";
@@ -6,6 +6,7 @@ import { landingContent } from "@/content/landing-content";
 import { siteConfig } from "@/config/site";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { InPageLink } from "@/components/ui/in-page-link";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 
 export function Navbar() {
@@ -31,24 +32,24 @@ export function Navbar() {
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Navegación principal">
             {mainNavigation.map((item) => (
-              <Link
+              <InPageLink
                 key={item.href}
                 href={item.href}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item.label}
-              </Link>
+              </InPageLink>
             ))}
           </nav>
 
           <div className="hidden items-center md:flex">
-            <Link
+            <InPageLink
               href={landingContent.nav.cta.href}
               aria-label={landingContent.nav.cta.ariaLabel}
               className={buttonVariants({ size: "sm", className: "h-10 px-5" })}
             >
               {landingContent.nav.cta.label}
-            </Link>
+            </InPageLink>
           </div>
 
           <MobileMenu />

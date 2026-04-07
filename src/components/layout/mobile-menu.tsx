@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
 import { useState } from "react";
 
 import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { buttonVariants } from "@/components/ui/button";
+import { InPageLink } from "@/components/ui/in-page-link";
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
@@ -67,24 +67,24 @@ export function MobileMenu() {
                 <div className="story-divider" />
                 <nav className="flex flex-col gap-1" aria-label="Navegación móvil principal">
                   {landingContent.nav.links.map((item) => (
-                    <Link
+                    <InPageLink
                       key={item.href}
                       href={item.href}
                       className="rounded-2xl px-3 py-3 text-sm font-medium text-foreground/85 transition-colors hover:bg-white/80 hover:text-foreground"
-                      onClick={() => setOpen(false)}
+                      onNavigate={() => setOpen(false)}
                     >
                       {item.label}
-                    </Link>
+                    </InPageLink>
                   ))}
                 </nav>
-                <Link
+                <InPageLink
                   href={landingContent.nav.cta.href}
                   aria-label={landingContent.nav.cta.ariaLabel}
                   className={buttonVariants({ size: "lg", className: "w-full" })}
-                  onClick={() => setOpen(false)}
+                  onNavigate={() => setOpen(false)}
                 >
                   {landingContent.nav.cta.label}
-                </Link>
+                </InPageLink>
               </div>
             </motion.div>
           </>

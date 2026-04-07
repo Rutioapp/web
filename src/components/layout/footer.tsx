@@ -1,10 +1,11 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 
 import { footerNavigation } from "@/config/navigation";
 import { landingContent } from "@/content/landing-content";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/container";
+import { InPageLink } from "@/components/ui/in-page-link";
 
 export function Footer() {
   return (
@@ -31,7 +32,11 @@ export function Footer() {
                 <ul className="mt-4 space-y-3">
                   {column.links.map((item) => (
                     <li key={item.href}>
-                      {item.href.startsWith("/") ? (
+                      {item.href.startsWith("/#") ? (
+                        <InPageLink href={item.href} className="text-sm text-background/45 transition-colors hover:text-background/80">
+                          {item.label}
+                        </InPageLink>
+                      ) : item.href.startsWith("/") ? (
                         <Link href={item.href} className="text-sm text-background/45 transition-colors hover:text-background/80">
                           {item.label}
                         </Link>

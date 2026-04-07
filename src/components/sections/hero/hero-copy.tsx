@@ -1,7 +1,7 @@
-import { landingContent } from "@/content/landing-content";
+﻿import { landingContent } from "@/content/landing-content";
 import { HeroSocialProof } from "@/components/sections/hero/hero-social-proof";
 import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
+import { InPageLink } from "@/components/ui/in-page-link";
 
 export function HeroCopy() {
   const { hero } = landingContent;
@@ -26,17 +26,17 @@ export function HeroCopy() {
       </p>
 
       <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
-        <Link href={hero.primaryCta.href} aria-label={hero.primaryCta.ariaLabel} className={buttonVariants({ size: "lg" })}>
+        <InPageLink href={hero.primaryCta.href} aria-label={hero.primaryCta.ariaLabel} className={buttonVariants({ size: "lg" })}>
           {hero.primaryCta.label}
-        </Link>
-        <Link
+        </InPageLink>
+        <InPageLink
           href={hero.secondaryCta.href}
           aria-label={hero.secondaryCta.ariaLabel}
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           <span>{hero.secondaryCta.label}</span>
-          <span aria-hidden="true">?</span>
-        </Link>
+          <span aria-hidden="true">→</span>
+        </InPageLink>
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-3" id="hero-foundations">

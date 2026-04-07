@@ -1,7 +1,9 @@
-import { landingContent } from "@/content/landing-content";
+﻿import Image from "next/image";
+
+import rutioLifestyleImage from "@/assets/lifestyle/rutio-lifestyle.png";
 import { Container } from "@/components/ui/container";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { TestimonialCard } from "@/components/sections/testimonials/testimonial-card";
+import { landingContent } from "@/content/landing-content";
 
 export function TestimonialsSection() {
   const section = landingContent.sections.testimonials;
@@ -26,14 +28,15 @@ export function TestimonialsSection() {
           ))}
         </div>
 
-        <div className="mx-auto mt-12 max-w-4xl">
-          <ImagePlaceholder
-            eyebrow={section.lifestylePlaceholder.eyebrow}
-            title={section.lifestylePlaceholder.title}
-            description={section.lifestylePlaceholder.description}
-            height={section.lifestylePlaceholder.height}
-            className="bg-brand/5"
-          />
+        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-[2rem] border border-brand/12 bg-white/55 p-3 shadow-soft sm:p-4">
+          <div className="overflow-hidden rounded-[1.6rem]">
+            <Image
+              src={rutioLifestyleImage}
+              alt="Persona usando Rutio en un entorno cálido y cotidiano con luz natural."
+              sizes="(min-width: 1280px) 896px, (min-width: 768px) 90vw, 100vw"
+              className="h-auto w-full object-cover"
+            />
+          </div>
         </div>
       </Container>
     </section>
