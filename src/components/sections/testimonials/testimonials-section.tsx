@@ -20,6 +20,7 @@ export function TestimonialsSection() {
             <span className="block">{section.title}</span>
             {section.highlight ? <em className="block font-normal italic text-brand">{section.highlight}</em> : null}
           </h2>
+          <p className="mt-5 text-pretty text-base leading-8 text-muted-foreground">{section.description}</p>
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -29,6 +30,13 @@ export function TestimonialsSection() {
         </div>
 
         <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-[2rem] border border-brand/12 bg-white/55 p-3 shadow-soft sm:p-4">
+          <div className="mb-4 px-1 sm:px-2">
+            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">
+              {section.lifestylePlaceholder.eyebrow}
+            </p>
+            <h3 className="mt-2 text-xl leading-6 text-foreground">{section.lifestylePlaceholder.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{section.lifestylePlaceholder.description}</p>
+          </div>
           <div className="overflow-hidden rounded-[1.6rem]">
             <Image
               src={rutioLifestyleImage}

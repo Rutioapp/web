@@ -28,7 +28,7 @@ export function Footer() {
           <div className="grid gap-6 sm:grid-cols-2">
             {footerNavigation.map((column) => (
               <div key={column.title}>
-                <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-background/35">{column.title}</h2>
+                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-background/35">{column.title}</h3>
                 <ul className="mt-4 space-y-3">
                   {column.links.map((item) => (
                     <li key={item.href}>

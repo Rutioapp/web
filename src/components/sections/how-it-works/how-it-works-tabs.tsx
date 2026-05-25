@@ -6,6 +6,7 @@ import { useId, useMemo, useRef, useState } from "react";
 import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
+import type { HowItWorksStep as HowItWorksContentStep } from "@/types/landing";
 
 interface HowItWorksTabsProps {
   eyebrow: string;
@@ -14,88 +15,27 @@ interface HowItWorksTabsProps {
   description: string;
 }
 
-interface StepVisual {
-  badge: string;
-  title: string;
-  description: string;
-  helper: string;
-}
-
 interface HowItWorksStep {
-  id: "create" | "track" | "stats" | "streak";
+  id: string;
   stepLabel: string;
   eyebrow: string;
   title: string;
   description: string;
-  visual: StepVisual;
+  visual: HowItWorksContentStep["visual"];
   note?: string;
 }
 
-const stepVisualConfig: Array<{
-  id: HowItWorksStep["id"];
-  eyebrow: string;
-  visual: StepVisual;
-  note?: string;
-}> = [
-  {
-    id: "create",
-    eyebrow: "CREAR HABITO",
-    visual: {
-      badge: "Captura pendiente",
-      title: "Flujo de creacion del habito",
-      description: "Mostrara nombre, familia, tipo de seguimiento y frecuencia.",
-      helper: "Visual final: alta guiada y clara para empezar sin friccion."
-    },
-    note: "Placeholder limpio para la futura pantalla o carrusel de creacion."
-  },
-  {
-    id: "track",
-    eyebrow: "REGISTRAR PROGRESO",
-    visual: {
-      badge: "Captura pendiente",
-      title: "Interaccion rapida en Today",
-      description: "Mostrara completar con check y ajustar habitos de conteo.",
-      helper: "Visual final: acciones rapidas, ritmo calmado y sin presion."
-    }
-  },
-  {
-    id: "stats",
-    eyebrow: "VER CONSISTENCIA",
-    visual: {
-      badge: "Captura pendiente",
-      title: "Vista semanal y mensual",
-      description: "Mostrara dias completados, pausas, familias activas y rachas.",
-      helper: "Visual final: patrones de consistencia para ajustar con criterio."
-    }
-  },
-  {
-    id: "streak",
-    eyebrow: "MOTIVACION CALMADA",
-    visual: {
-      badge: "Captura pendiente",
-      title: "Progreso de nivel y logros",
-      description: "Mostrara XP, avance de nivel y un logro desbloqueado.",
-      helper: "Visual final: recompensa sutil para sostener continuidad."
-    }
-  }
-];
+const stepIds = ["create", "track", "stats", "streak"] as const;
 
-const howItWorksSteps: HowItWorksStep[] = stepVisualConfig
-  .map<HowItWorksStep | null>((config, index) => {
-    const contentStep = landingContent.sections.howItWorks.steps[index];
-    if (!contentStep) return null;
-
-    return {
-      id: config.id,
-      stepLabel: contentStep.number,
-      eyebrow: config.eyebrow,
-      title: contentStep.title,
-      description: contentStep.description,
-      visual: config.visual,
-      ...(config.note ? { note: config.note } : {})
-    };
-  })
-  .filter((step): step is HowItWorksStep => step !== null);
+const howItWorksSteps: HowItWorksStep[] = landingContent.sections.howItWorks.steps.map((step, index) => ({
+  id: stepIds[index] ?? `step-${index + 1}`,
+  stepLabel: step.number,
+  eyebrow: step.eyebrow,
+  title: step.title,
+  description: step.description,
+  visual: step.visual,
+  note: step.note
+}));
 
 function StepVisualCard({ step }: { step: HowItWorksStep }) {
   return (
@@ -112,7 +52,7 @@ function StepVisualCard({ step }: { step: HowItWorksStep }) {
 
 export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowItWorksTabsProps) {
   const prefersReducedMotion = useReducedMotionPreference();
-  const [activeStepId, setActiveStepId] = useState<HowItWorksStep["id"]>(howItWorksSteps[0]?.id ?? "create");
+  const [activeStepId, setActiveStepId] = useState<HowItWorksStep["id"]>(howItWorksSteps[0]?.id ?? "step-1");
   const tabsId = useId();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -169,7 +109,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
 
         <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{description}</p>
 
-        <div className="mt-10" role="tablist" aria-label="Pasos de como funciona Rutio" aria-orientation="vertical">
+        <div className="mt-10" role="tablist" aria-label="Pasos de cómo funciona Rutio" aria-orientation="vertical">
           <div className="flex flex-col gap-3">
             {howItWorksSteps.map((step, index) => {
               const isActive = step.id === activeStep.id;

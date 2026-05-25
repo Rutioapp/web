@@ -108,8 +108,16 @@ export interface GalleryPlaceholder {
 
 export interface HowItWorksStep {
   number: string;
+  eyebrow: string;
   title: string;
   description: string;
+  visual: {
+    badge: string;
+    title: string;
+    description: string;
+    helper: string;
+  };
+  note?: string;
 }
 
 export interface HowItWorksContent extends SectionIntro {

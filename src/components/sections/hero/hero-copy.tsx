@@ -42,7 +42,7 @@ export function HeroCopy() {
       <div className="mt-8 grid gap-3 sm:grid-cols-3" id="hero-foundations">
         {hero.highlights.map((item) => (
           <article key={item.title} className="rounded-[1.5rem] border border-line/70 bg-white/60 p-4 shadow-soft backdrop-blur">
-            <h2 className="text-base leading-6 text-foreground">{item.title}</h2>
+            <h3 className="text-base leading-6 text-foreground">{item.title}</h3>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
           </article>
         ))}

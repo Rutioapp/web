@@ -1,14 +1,14 @@
 ﻿import type { LandingContent } from "@/types/landing";
 
 export const landingContent = {
-  announcement: "Beta privada 2026 · Plazas limitadas de acceso anticipado.",
+  announcement: "Beta privada 2026 · Acceso anticipado con plazas limitadas.",
   nav: {
     links: [
       { label: "Cómo funciona", href: "/#como-funciona" },
       { label: "Familias", href: "/#familias" }
     ],
     cta: {
-      label: "Unirse a la beta",
+      label: "Unirme a la beta privada",
       href: "/#beta",
       ariaLabel: "Ir al formulario de acceso anticipado de la beta de Rutio"
     }
@@ -20,9 +20,9 @@ export const landingContent = {
     titleAccent: "construir",
     titleStrong: "tu camino.",
     description:
-      "Rutio te ayuda a construir hábitos consistentes, ver tu progreso con claridad y mantener la motivación con una gamificación calmada y sostenible.",
+      "Rutio es una app de hábitos para construir consistencia sostenible, ver progreso real y mantener la motivación con señales visuales claras.",
     primaryCta: {
-      label: "Quiero acceso anticipado",
+      label: "Unirme a la beta privada",
       href: "/#beta",
       ariaLabel: "Abrir el formulario para pedir acceso anticipado a la beta privada de Rutio"
     },
@@ -34,26 +34,26 @@ export const landingContent = {
     highlights: [
       {
         title: "Constancia sostenible",
-        description: "Rutinas diseñadas para acompañarte cada día, sin presión y sin culpa."
+        description: "Hábitos claros que encajan en tu ritmo diario para sostenerlos sin fricción."
       },
       {
         title: "Progreso visual",
-        description: "Tu avance se ve en cada semana, racha y hábito completado."
+        description: "Semanas, rachas y familias en vistas legibles para entender tu evolución."
       },
       {
         title: "Motivación calmada",
-        description: "XP, logros y recompensas ligeras para volver mañana con intención."
+        description: "XP, logros y pequeños desbloqueos para volver mañana con intención."
       }
     ],
     socialProof: {
-      detail: "Seguimos validando con cupos reducidos para mantener una beta cuidada.",
+      detail: "Abrimos acceso por cupos para mantener una beta cuidada y aprender de cada tanda.",
       counter: {
-        title: "Progreso de beta",
+        title: "Referencia de beta",
         fallbackValue: 30,
         metricLabel: "rutinas iniciadas",
         contextLabel: "en la beta privada",
-        loadingLabel: "Actualizando progreso de la beta",
-        fallbackHint: "Dato de referencia mientras conectamos el contador en tiempo real.",
+        loadingLabel: "Actualizando referencia de la beta",
+        fallbackHint: "Valor de referencia mientras finalizamos la integración del contador.",
         errorHint: "Mostrando un valor de referencia estable."
       },
       avatars: [
@@ -145,44 +145,73 @@ export const landingContent = {
   sections: {
     marquee: {
       items: [
-        "Construye tu camino",
-        "Gamificación real",
-        "7 dimensiones del crecimiento",
-        "Hábitos que duran",
-        "Gana mientras creces",
-        "Tu vida, organizada"
+        "Constancia que se sostiene",
+        "Progreso que se ve",
+        "Hábitos por familias",
+        "Diario y tareas en contexto",
+        "Motivación calmada",
+        "Diseño pensado para durar"
       ]
     },
     howItWorks: {
       eyebrow: "Así funciona",
       title: "Simple de usar.",
-      highlight: "Difícil de dejar.",
+      highlight: "Fácil de sostener.",
       description:
-        "Rutio está diseñada para que empieces en 2 minutos y sigas durante años. Sin fricción, con recompensa real.",
+        "Rutio está diseñada para que puedas empezar rápido, mantener el ritmo y ajustar con claridad cuando tu semana cambia.",
       steps: [
         {
           number: "01",
+          eyebrow: "CREAR HÁBITO",
           title: "Empieza con un hábito claro",
           description:
-            "Elige un hábito simple, define cómo quieres registrarlo y ubícalo en su familia para que encaje en tu rutina desde el primer día."
+            "Elige un hábito concreto, define su seguimiento y ubícalo en una familia para que encaje en tu rutina desde el inicio.",
+          visual: {
+            badge: "Captura pendiente",
+            title: "Alta de hábito guiada",
+            description: "Mostrará nombre, familia, tipo de seguimiento y frecuencia semanal.",
+            helper: "Visual final: creación breve, clara y sin pasos innecesarios."
+          },
+          note: "Placeholder para la captura final de creación de hábito."
         },
         {
           number: "02",
+          eyebrow: "REGISTRAR PROGRESO",
           title: "Marca avances sin fricción",
           description:
-            "Marca en segundos hábitos tipo check o de conteo, sin pantallas pesadas ni presión de productividad."
+            "Registra en segundos hábitos tipo check o de conteo desde Today, sin menús largos ni ruido.",
+          visual: {
+            badge: "Captura pendiente",
+            title: "Registro rápido en Today",
+            description: "Mostrará acciones de completar y ajustar conteos desde una sola vista.",
+            helper: "Visual final: interacción directa y ritmo calmado."
+          }
         },
         {
           number: "03",
+          eyebrow: "VER CONSISTENCIA",
           title: "Ve tu consistencia de forma visual",
           description:
-            "Observa días, semanas, familias y rachas en vistas claras para detectar patrones reales y ajustar con intención."
+            "Observa días, semanas, familias y rachas en vistas limpias para detectar patrones y ajustar con criterio.",
+          visual: {
+            badge: "Captura pendiente",
+            title: "Semana y mes en contexto",
+            description: "Mostrará días completados, pausas y equilibrio entre familias activas.",
+            helper: "Visual final: lectura rápida de consistencia real."
+          }
         },
         {
           number: "04",
+          eyebrow: "MOTIVACIÓN CALMADA",
           title: "Mantén la motivación con calma",
           description:
-            "Suma XP, niveles y logros discretos que celebran avances pequeños y te ayudan a sostener la continuidad."
+            "Suma XP, niveles y logros discretos que celebran pequeños avances y sostienen la continuidad.",
+          visual: {
+            badge: "Captura pendiente",
+            title: "XP, nivel y logro del día",
+            description: "Mostrará progreso de nivel y un logro desbloqueado sin saturar la pantalla.",
+            helper: "Visual final: recompensa sutil para volver mañana."
+          }
         }
       ],
       gallery: {
@@ -214,7 +243,7 @@ export const landingContent = {
       title: "Cada parte de ti,",
       highlight: "cubierta.",
       description:
-        "No solo deporte o meditación. Rutio cubre el espectro completo del crecimiento personal.",
+        "Rutio organiza tus hábitos por áreas de vida para que avances con equilibrio, no solo por impulso.",
       items: [
         { slug: "mente", emoji: "ME", label: "Mente", description: "Lectura, aprendizaje, foco", color: "124 107 174" },
         { slug: "espiritu", emoji: "ES", label: "Espíritu", description: "Meditación, gratitud, calma", color: "106 158 127" },
@@ -230,7 +259,7 @@ export const landingContent = {
       title: "Tu esfuerzo",
       highlight: "tiene valor real.",
       description:
-        "Visualiza tu constancia, no solo una lista de tareas. Rutio convierte semanas, familias y rachas en señales claras para seguir con calma.",
+        "La motivación en Rutio es visual y serena: progreso por semanas, equilibrio por familias y pequeñas recompensas que acompañan.",
       amber: {
         title: "Tu moneda · Ámbar",
         amount: "320",
@@ -261,15 +290,15 @@ export const landingContent = {
       metrics: [
         {
           shortLabel: "VIS",
-          title: "Constancia visible en el tiempo",
+          title: "Constancia visible",
           description:
-            "Detecta patrones semanales y mensuales de un vistazo para entender qué hábitos sostienes de verdad."
+            "Detecta patrones semanales y mensuales de un vistazo para entender qué sostienes de verdad."
         },
         {
           shortLabel: "FAM",
           title: "Equilibrio por familias",
           description:
-            "Agrupa hábitos por familias y ve si tu energía está repartida entre mente, cuerpo, emoción y foco profesional."
+            "Comprueba si tu energía está repartida entre mente, cuerpo, emocional, social y foco profesional."
         },
         {
           shortLabel: "XP",
@@ -283,24 +312,24 @@ export const landingContent = {
       eyebrow: "Beta testers",
       title: "Primeros en el",
       highlight: "camino.",
-      description: "Sensaciones tempranas de usuarios que ya entienden el tono del producto.",
+      description: "Primeras impresiones de personas que están construyendo consistencia con Rutio.",
       items: [
         {
-          quote: "Por fin una app que no me hace sentir culpable cuando fallo un día. Es como tener un compañero que te entiende.",
+          quote: "Por fin una app que no me hace sentir culpable cuando fallo un día. Me ayuda a retomar sin drama.",
           author: "Alba M.",
           role: "Diseñadora UX · 28 años",
           initials: "A",
           color: "122 158 126"
         },
         {
-          quote: "La gamificación engancha de verdad. Llevo 34 días seguidos y lo que más me sorprende es que no parece forzado.",
+          quote: "Los XP y los logros están bien medidos. Motivan sin convertir el hábito en una competición constante.",
           author: "Marc T.",
           role: "Emprendedor · 31 años",
           initials: "M",
           color: "184 137 90"
         },
         {
-          quote: "El diario integrado cambió cómo me relaciono con mis hábitos. Ver los patrones semanales es revelador.",
+          quote: "El diario integrado me ayuda a entender por qué cumplo más en unas semanas que en otras.",
           author: "Laura G.",
           role: "Psicóloga · 25 años",
           initials: "L",
@@ -317,15 +346,15 @@ export const landingContent = {
     },
     beta: {
       eyebrow: "Beta privada",
-      title: "Empieza antes",
-      highlight: "que los demás.",
+      title: "Únete a la beta",
+      highlight: "privada.",
       description:
-        "La beta de Rutio es limitada e invitación. Únete a la lista, forma parte del proceso y ayuda a construir la mejor app de hábitos que haya existido.",
+        "Solicita acceso anticipado, comparte tu contexto y ayúdanos a pulir una experiencia de hábitos más calmada y útil.",
       spotsLabel: "Solo 200 plazas disponibles · iOS primero",
       benefits: [
-        { label: "Acceso anticipado a la versión completa" },
+        { label: "Acceso anticipado a la experiencia completa" },
         { label: "500 ámbar de bienvenida" },
-        { label: "Influencia directa en el producto" }
+        { label: "Feedback directo con el equipo de producto" }
       ],
       form: {
         title: "Reserva tu plaza",
@@ -357,10 +386,10 @@ export const landingContent = {
           { value: "android", label: "Android" },
           { value: "both", label: "Ambos" }
         ],
-        submitLabel: "Quiero mi plaza en la beta",
-        note: "Recibirás un email de confirmación al apuntarte. Tu plaza es personal e intransferible.",
+        submitLabel: "Unirme a la beta privada",
+        note: "Recibirás un email de confirmación al apuntarte. Tu acceso será personal e intransferible.",
         successTitle: "Tu solicitud ya está guardada.",
-        successDescription: "Cuando abramos la siguiente ola de invitaciones, serás de las primeras personas en enterarte.",
+        successDescription: "Cuando abramos la siguiente ola de invitaciones, te avisaremos por email.",
         successAction: "Enviar otra solicitud"
       }
     },
@@ -372,7 +401,7 @@ export const landingContent = {
   },
   footer: {
     blurb:
-      "Rutio nace para convertir la constancia diaria en una experiencia más humana, motivadora y visualmente cuidada.",
+      "Rutio convierte la constancia diaria en una experiencia más humana, visual y sostenible.",
     columns: [
       {
         title: "Producto",

@@ -29,7 +29,7 @@ export function BetaSection() {
               {section.benefits.map((benefit) => (
                 <div key={benefit.label} className="flex items-center gap-3">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#c9a84c]/25 bg-[#c9a84c]/10 text-sm text-brand-strong">
-                    ?
+                    ✓
                   </span>
                   <p className="text-sm leading-6 text-foreground/75 sm:text-[0.95rem]">{benefit.label}</p>
                 </div>
