@@ -1,9 +1,18 @@
 import { z } from "zod";
 
+export const WAITLIST_FIELD_LIMITS = {
+  firstName: 60,
+  lastName: 60,
+  email: 254,
+  source: 64,
+  message: 280,
+  honeypot: 256
+} as const;
+
 export const betaFormSchema = z.object({
-  firstName: z.string().trim().min(2, "Escribe tu nombre.").max(60, "Usa un nombre más corto."),
-  lastName: z.string().trim().min(2, "Escribe tu apellido.").max(60, "Usa un apellido más corto."),
-  email: z.string().trim().email("Introduce un email válido."),
+  firstName: z.string().trim().min(2, "Escribe tu nombre.").max(WAITLIST_FIELD_LIMITS.firstName, "Usa un nombre mas corto."),
+  lastName: z.string().trim().min(2, "Escribe tu apellido.").max(WAITLIST_FIELD_LIMITS.lastName, "Usa un apellido mas corto."),
+  email: z.string().trim().toLowerCase().email("Introduce un email valido.").max(WAITLIST_FIELD_LIMITS.email, "El email es demasiado largo."),
   challenge: z.string().trim().min(1, "Selecciona una familia principal."),
   device: z.string().trim().min(1, "Selecciona tu dispositivo principal."),
   consent: z.boolean().refine((value) => value, {
@@ -12,3 +21,10 @@ export const betaFormSchema = z.object({
 });
 
 export type BetaFormValues = z.infer<typeof betaFormSchema>;
+
+export const waitlistHoneypotSchema = z
+  .string()
+  .trim()
+  .max(WAITLIST_FIELD_LIMITS.honeypot, "Campo no valido.")
+  .optional()
+  .default("");

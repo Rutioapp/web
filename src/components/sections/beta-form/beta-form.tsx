@@ -4,7 +4,11 @@ import { useState } from "react";
 
 import { landingContent } from "@/content/landing-content";
 import { trackEvent } from "@/lib/analytics";
-import { betaFormSchema, type BetaFormValues } from "@/lib/validations/beta-form.schema";
+import {
+  betaFormSchema,
+  waitlistHoneypotSchema,
+  type BetaFormValues
+} from "@/lib/validations/beta-form.schema";
 import { submitWaitlistEntry } from "@/lib/waitlist/submit-waitlist-entry";
 import { Input } from "@/components/ui/input";
 import { BetaSuccessState } from "@/components/sections/beta-form/beta-success-state";
@@ -20,6 +24,8 @@ const initialValues: BetaFormValues = {
 
 type FieldErrors = Partial<Record<keyof BetaFormValues, string>>;
 type FormMessageTone = "error" | "info";
+const HONEYPOT_FIELD_NAME = "website";
+const HONEYPOT_SUCCESS_NAME = "Gracias";
 
 interface FormMessage {
   tone: FormMessageTone;
@@ -43,6 +49,17 @@ export function BetaForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSubmitting) {
+      return;
+    }
+    const honeypotEntry = new FormData(event.currentTarget).get(HONEYPOT_FIELD_NAME);
+    const honeypotValue = typeof honeypotEntry === "string" ? honeypotEntry : "";
+    const honeypotResult = waitlistHoneypotSchema.safeParse(honeypotValue);
+    const isLikelyBot = !honeypotResult.success || honeypotResult.data.length > 0;
+
+    if (isLikelyBot) {
+      setErrors({});
+      setFormMessage(null);
+      setSubmittedName(values.firstName.trim() || HONEYPOT_SUCCESS_NAME);
       return;
     }
 
@@ -112,6 +129,8 @@ export function BetaForm() {
           name="firstName"
           value={values.firstName}
           placeholder={formContent.placeholders.firstName}
+          maxLength={60}
+          autoComplete="given-name"
           disabled={isSubmitting}
           onChange={(event) => updateField("firstName", event.target.value)}
           error={errors.firstName}
@@ -121,6 +140,8 @@ export function BetaForm() {
           name="lastName"
           value={values.lastName}
           placeholder={formContent.placeholders.lastName}
+          maxLength={60}
+          autoComplete="family-name"
           disabled={isSubmitting}
           onChange={(event) => updateField("lastName", event.target.value)}
           error={errors.lastName}
@@ -134,9 +155,24 @@ export function BetaForm() {
           type="email"
           value={values.email}
           placeholder={formContent.placeholders.email}
+          maxLength={254}
+          autoComplete="email"
+          inputMode="email"
           disabled={isSubmitting}
           onChange={(event) => updateField("email", event.target.value)}
           error={errors.email}
+        />
+      </div>
+
+      <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor={HONEYPOT_FIELD_NAME}>Website</label>
+        <input
+          id={HONEYPOT_FIELD_NAME}
+          name={HONEYPOT_FIELD_NAME}
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          maxLength={256}
         />
       </div>
 

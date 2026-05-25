@@ -5,10 +5,11 @@ import {
   isSupabaseBrowserConfigured,
   type WaitlistSignupInsert
 } from "@/lib/supabase/client";
-import type { BetaFormValues } from "@/lib/validations/beta-form.schema";
+import { WAITLIST_FIELD_LIMITS, type BetaFormValues } from "@/lib/validations/beta-form.schema";
 
 const DUPLICATE_EMAIL_ERROR_CODE = "23505";
 const WAITLIST_SOURCE = "rutio_web_landing_beta";
+// TODO: Move this flow behind a Next.js route handler for stronger server-side rate limiting / bot controls.
 const WAITLIST_CONFIGURATION_ERROR =
   "La lista de espera estara disponible en breve. Prueba de nuevo en unos minutos.";
 const GENERIC_WAITLIST_ERROR = "No pudimos guardar tu solicitud ahora mismo. Intentalo de nuevo en unos minutos.";
@@ -34,6 +35,14 @@ export type SubmitWaitlistEntryResult =
   | SubmitWaitlistDuplicateResult
   | SubmitWaitlistErrorResult;
 
+function truncate(value: string, maxLength: number) {
+  if (value.length <= maxLength) {
+    return value;
+  }
+
+  return value.slice(0, maxLength);
+}
+
 function isDuplicateEmailError(error: PostgrestError) {
   if (error.code === DUPLICATE_EMAIL_ERROR_CODE) {
     return true;
@@ -46,14 +55,14 @@ function isDuplicateEmailError(error: PostgrestError) {
 
 function toWaitlistInsertPayload(values: BetaFormValues): WaitlistSignupInsert {
   const fullName = `${values.firstName.trim()} ${values.lastName.trim()}`.trim();
-  const locale = typeof navigator !== "undefined" ? navigator.language : null;
-  const userAgent = typeof navigator !== "undefined" ? navigator.userAgent : null;
+  const locale = typeof navigator !== "undefined" ? truncate(navigator.language, 32) : null;
+  const userAgent = typeof navigator !== "undefined" ? truncate(navigator.userAgent, 512) : null;
 
   return {
-    email: values.email.trim().toLowerCase(),
-    name: fullName || null,
-    source: WAITLIST_SOURCE,
-    message: `challenge:${values.challenge.trim()};device:${values.device.trim()}`,
+    email: values.email,
+    name: fullName ? truncate(fullName, WAITLIST_FIELD_LIMITS.firstName + WAITLIST_FIELD_LIMITS.lastName + 1) : null,
+    source: truncate(WAITLIST_SOURCE, WAITLIST_FIELD_LIMITS.source),
+    message: truncate(`challenge:${values.challenge.trim()};device:${values.device.trim()}`, WAITLIST_FIELD_LIMITS.message),
     locale,
     user_agent: userAgent
   };
@@ -77,16 +86,24 @@ export async function submitWaitlistEntry(values: BetaFormValues): Promise<Submi
   }
 
   const payload = toWaitlistInsertPayload(values);
-  const { error } = await supabase.from("waitlist_signups").insert(payload);
 
-  if (!error) {
-    return { status: "success" };
-  }
+  try {
+    const { error } = await supabase.from("waitlist_signups").insert(payload);
 
-  if (isDuplicateEmailError(error)) {
+    if (!error) {
+      return { status: "success" };
+    }
+
+    if (isDuplicateEmailError(error)) {
+      return {
+        status: "duplicate",
+        message: DUPLICATE_WAITLIST_MESSAGE
+      };
+    }
+  } catch {
     return {
-      status: "duplicate",
-      message: DUPLICATE_WAITLIST_MESSAGE
+      status: "error",
+      message: GENERIC_WAITLIST_ERROR
     };
   }
 

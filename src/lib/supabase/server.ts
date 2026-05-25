@@ -5,8 +5,12 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
 
 export type SupabaseServerClient = SupabaseClient;
 
+function isLikelyServiceRoleKey(key: string) {
+  return key.toLowerCase().includes("service_role");
+}
+
 export function createSupabaseServerClient(): SupabaseServerClient | null {
-  if (!supabaseUrl || !supabaseAnonKey) {
+  if (!supabaseUrl || !supabaseAnonKey || isLikelyServiceRoleKey(supabaseAnonKey)) {
     return null;
   }
 

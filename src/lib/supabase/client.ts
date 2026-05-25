@@ -37,8 +37,20 @@ let browserClient: SupabaseClient | null = null;
 
 export type SupabaseBrowserClient = SupabaseClient;
 
+function isLikelyServiceRoleKey(key: string) {
+  return key.toLowerCase().includes("service_role");
+}
+
 export function isSupabaseBrowserConfigured() {
-  return Boolean(supabaseUrl && supabaseAnonKey);
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return false;
+  }
+
+  if (isLikelyServiceRoleKey(supabaseAnonKey)) {
+    return false;
+  }
+
+  return true;
 }
 
 export function createSupabaseBrowserClient(): SupabaseBrowserClient | null {
