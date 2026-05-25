@@ -1,13 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image, { type StaticImageData } from "next/image";
 import { useId, useMemo, useRef, useState } from "react";
 
-import diarioScreenshot from "@/assets/screenshots/diario.jpeg";
-import estadisticasScreenshot from "@/assets/screenshots/estadisticas.jpeg";
-import mensualScreenshot from "@/assets/screenshots/mensual.jpeg";
-import semanalScreenshot from "@/assets/screenshots/semanal.jpeg";
+import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -18,64 +14,105 @@ interface HowItWorksTabsProps {
   description: string;
 }
 
+interface StepVisual {
+  badge: string;
+  title: string;
+  description: string;
+  helper: string;
+}
+
 interface HowItWorksStep {
   id: "create" | "track" | "stats" | "streak";
   stepLabel: string;
   eyebrow: string;
   title: string;
   description: string;
-  image: StaticImageData;
-  alt: string;
+  visual: StepVisual;
   note?: string;
 }
 
-const howItWorksSteps: HowItWorksStep[] = [
+const stepVisualConfig: Array<{
+  id: HowItWorksStep["id"];
+  eyebrow: string;
+  visual: StepVisual;
+  note?: string;
+}> = [
   {
     id: "create",
-    stepLabel: "01",
-    eyebrow: "CREAR HÁBITO",
-    title: "Empieza con un hábito claro",
-    description:
-      "Define una acción concreta, visible y fácil de repetir para que el primer paso se sienta posible desde el primer día.",
-    image: diarioScreenshot,
-    alt: "Pantalla diaria de Rutio usada como placeholder temporal para la creación de hábitos.",
-    note: "Pendiente de sustituir por la pantalla exacta de creación cuando la tengas."
+    eyebrow: "CREAR HABITO",
+    visual: {
+      badge: "Captura pendiente",
+      title: "Flujo de creacion del habito",
+      description: "Mostrara nombre, familia, tipo de seguimiento y frecuencia.",
+      helper: "Visual final: alta guiada y clara para empezar sin friccion."
+    },
+    note: "Placeholder limpio para la futura pantalla o carrusel de creacion."
   },
   {
     id: "track",
-    stepLabel: "02",
     eyebrow: "REGISTRAR PROGRESO",
-    title: "Marca avances sin fricción",
-    description:
-      "Completa tus hábitos del día y visualiza la semana en una vista clara para detectar ritmo, huecos y progreso real.",
-    image: semanalScreenshot,
-    alt: "Pantalla semanal de Rutio con una cuadrícula de seguimiento de hábitos."
+    visual: {
+      badge: "Captura pendiente",
+      title: "Interaccion rapida en Today",
+      description: "Mostrara completar con check y ajustar habitos de conteo.",
+      helper: "Visual final: acciones rapidas, ritmo calmado y sin presion."
+    }
   },
   {
     id: "stats",
-    stepLabel: "03",
-    eyebrow: "VER ESTADÍSTICAS",
-    title: "Entiende lo que sí funciona",
-    description:
-      "Consulta consistencia, rachas y porcentaje completado en una pantalla sobria que convierte tus datos en decisiones.",
-    image: estadisticasScreenshot,
-    alt: "Pantalla de estadísticas de Rutio con progreso, consistencia y mejor racha."
+    eyebrow: "VER CONSISTENCIA",
+    visual: {
+      badge: "Captura pendiente",
+      title: "Vista semanal y mensual",
+      description: "Mostrara dias completados, pausas, familias activas y rachas.",
+      helper: "Visual final: patrones de consistencia para ajustar con criterio."
+    }
   },
   {
     id: "streak",
-    stepLabel: "04",
-    eyebrow: "MANTENER CONSTANCIA",
-    title: "Convierte el impulso en rutina",
-    description:
-      "Mira tu progreso mensual para mantener perspectiva, proteger tu racha y seguir construyendo hábitos que duran.",
-    image: mensualScreenshot,
-    alt: "Pantalla mensual de Rutio con calendario, racha y resumen del hábito activo."
+    eyebrow: "MOTIVACION CALMADA",
+    visual: {
+      badge: "Captura pendiente",
+      title: "Progreso de nivel y logros",
+      description: "Mostrara XP, avance de nivel y un logro desbloqueado.",
+      helper: "Visual final: recompensa sutil para sostener continuidad."
+    }
   }
 ];
 
+const howItWorksSteps: HowItWorksStep[] = stepVisualConfig
+  .map<HowItWorksStep | null>((config, index) => {
+    const contentStep = landingContent.sections.howItWorks.steps[index];
+    if (!contentStep) return null;
+
+    return {
+      id: config.id,
+      stepLabel: contentStep.number,
+      eyebrow: config.eyebrow,
+      title: contentStep.title,
+      description: contentStep.description,
+      visual: config.visual,
+      ...(config.note ? { note: config.note } : {})
+    };
+  })
+  .filter((step): step is HowItWorksStep => step !== null);
+
+function StepVisualCard({ step }: { step: HowItWorksStep }) {
+  return (
+    <div className="mt-6 rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
+      <div className="mx-auto max-w-[18rem] rounded-[2.1rem] border border-dashed border-brand/25 bg-white/70 p-5 shadow-soft">
+        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{step.visual.badge}</p>
+        <h4 className="mt-3 text-lg leading-6 text-foreground">{step.visual.title}</h4>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.visual.description}</p>
+        <p className="mt-4 text-xs leading-5 text-muted-foreground/90">{step.visual.helper}</p>
+      </div>
+    </div>
+  );
+}
+
 export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowItWorksTabsProps) {
   const prefersReducedMotion = useReducedMotionPreference();
-  const [activeStepId, setActiveStepId] = useState<HowItWorksStep["id"]>(howItWorksSteps[0].id);
+  const [activeStepId, setActiveStepId] = useState<HowItWorksStep["id"]>(howItWorksSteps[0]?.id ?? "create");
   const tabsId = useId();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -83,13 +120,18 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
     () => howItWorksSteps.findIndex((step) => step.id === activeStepId),
     [activeStepId]
   );
-  const activeStep = howItWorksSteps[activeIndex] ?? howItWorksSteps[0];
+  const activeStep = useMemo(
+    () => howItWorksSteps[activeIndex] ?? howItWorksSteps[0],
+    [activeIndex]
+  );
 
   const focusTab = (index: number) => {
-    const target = howItWorksSteps[(index + howItWorksSteps.length) % howItWorksSteps.length];
+    if (howItWorksSteps.length === 0) return;
+    const nextIndex = (index + howItWorksSteps.length) % howItWorksSteps.length;
+    const target = howItWorksSteps[nextIndex];
     if (!target) return;
     setActiveStepId(target.id);
-    tabRefs.current[(index + howItWorksSteps.length) % howItWorksSteps.length]?.focus();
+    tabRefs.current[nextIndex]?.focus();
   };
 
   const panelAnimation = prefersReducedMotion
@@ -110,6 +152,8 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
         transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] }
       };
 
+  if (!activeStep) return null;
+
   return (
     <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-16">
       <div>
@@ -125,7 +169,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
 
         <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{description}</p>
 
-        <div className="mt-10" role="tablist" aria-label="Pasos de cómo funciona Rutio" aria-orientation="vertical">
+        <div className="mt-10" role="tablist" aria-label="Pasos de como funciona Rutio" aria-orientation="vertical">
           <div className="flex flex-col gap-3">
             {howItWorksSteps.map((step, index) => {
               const isActive = step.id === activeStep.id;
@@ -200,17 +244,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
                         className="overflow-hidden lg:hidden"
                       >
                         <div className="surface-card surface-glow overflow-hidden bg-white/60 p-4 sm:p-5">
-                          <div className="rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
-                            <div className="mx-auto max-w-[18rem] overflow-hidden rounded-[2.1rem] border border-white/80 bg-[#f6efe3] p-1 shadow-soft">
-                              <Image
-                                src={step.image}
-                                alt={step.alt}
-                                sizes="(min-width: 640px) 320px, 100vw"
-                                className="h-auto w-full rounded-[1.7rem]"
-                                priority={step.id === howItWorksSteps[0].id}
-                              />
-                            </div>
-                          </div>
+                          <StepVisualCard step={step} />
 
                           <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
                             <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -263,17 +297,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
 
             <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-[0.95rem]">{activeStep.description}</p>
 
-            <div className="mt-6 rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
-              <div className="mx-auto max-w-[18rem] overflow-hidden rounded-[2.1rem] border border-white/80 bg-[#f6efe3] p-1 shadow-soft">
-                <Image
-                  src={activeStep.image}
-                  alt={activeStep.alt}
-                  sizes="(min-width: 1024px) 288px, (min-width: 640px) 320px, 100vw"
-                  className="h-auto w-full rounded-[1.7rem]"
-                  priority={activeStep.id === howItWorksSteps[0].id}
-                />
-              </div>
-            </div>
+            <StepVisualCard step={activeStep} />
 
             <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
               <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -299,3 +323,5 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
     </div>
   );
 }
+
+

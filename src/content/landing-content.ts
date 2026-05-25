@@ -162,23 +162,27 @@ export const landingContent = {
       steps: [
         {
           number: "01",
-          title: "Elige tus hábitos",
-          description: "Más de 200 hábitos listos, organizados en 7 familias. O crea los tuyos. En minutos tienes tu primera rutina."
+          title: "Empieza con un hábito claro",
+          description:
+            "Elige un hábito simple, define cómo quieres registrarlo y ubícalo en su familia para que encaje en tu rutina desde el primer día."
         },
         {
           number: "02",
-          title: "Completa y gana",
-          description: "Cada hábito completado suma XP y moneda Ámbar. Tu progreso se convierte en algo tangible, no solo en números vacíos."
+          title: "Marca avances sin fricción",
+          description:
+            "Marca en segundos hábitos tipo check o de conteo, sin pantallas pesadas ni presión de productividad."
         },
         {
           number: "03",
-          title: "Personaliza tu experiencia",
-          description: "Usa el Ámbar en la tienda: temas de cielo, fondos nocturnos, amanecer. Tu app evoluciona contigo."
+          title: "Ve tu consistencia de forma visual",
+          description:
+            "Observa días, semanas, familias y rachas en vistas claras para detectar patrones reales y ajustar con intención."
         },
         {
           number: "04",
-          title: "Reflexiona en tu diario",
-          description: "El diario integrado te conecta con tus avances. Prompts guiados, resúmenes semanales y patrones que no verías solo."
+          title: "Mantén la motivación con calma",
+          description:
+            "Suma XP, niveles y logros discretos que celebran avances pequeños y te ayudan a sostener la continuidad."
         }
       ],
       gallery: {
