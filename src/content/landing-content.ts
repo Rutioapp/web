@@ -1,7 +1,7 @@
 ﻿import type { LandingContent } from "@/types/landing";
 
 export const landingContent = {
-  announcement: "Beta privada 2026 · Plazas limitadas para iPhone y iPad.",
+  announcement: "Beta privada 2026 · Plazas limitadas de acceso anticipado.",
   nav: {
     links: [
       { label: "Cómo funciona", href: "/#como-funciona" },
@@ -14,35 +14,35 @@ export const landingContent = {
     }
   },
   hero: {
-    eyebrow: "Beta privada · iOS · 2026",
+    eyebrow: "Beta privada · Acceso anticipado 2026",
     titleLead: "El hábito",
     titleAccentPrefix: "de",
     titleAccent: "construir",
     titleStrong: "tu camino.",
     description:
-      "Rutio convierte tus hábitos en una experiencia que engancha de verdad. Gamificación, reflexión personal y siete dimensiones del crecimiento, en una sola app.",
+      "Rutio te ayuda a construir hábitos consistentes, ver tu progreso con claridad y mantener la motivación con una gamificación calmada y sostenible.",
     primaryCta: {
-      label: "Pedir mi plaza en la beta",
+      label: "Quiero acceso anticipado",
       href: "/#beta",
-      ariaLabel: "Abrir el formulario para pedir una plaza en la beta privada de Rutio"
+      ariaLabel: "Abrir el formulario para pedir acceso anticipado a la beta privada de Rutio"
     },
     secondaryCta: {
-      label: "Cómo funciona",
+      label: "Ver cómo funciona",
       href: "/#como-funciona",
       ariaLabel: "Ir a la sección que explica cómo funciona Rutio"
     },
     highlights: [
       {
-        title: "Gamificación real",
-        description: "Progreso visible, moneda interna y rachas diseñadas con un tono sobrio y premium."
+        title: "Constancia sostenible",
+        description: "Rutinas diseñadas para acompañarte cada día, sin presión y sin culpa."
       },
       {
-        title: "Siete familias",
-        description: "Una estructura clara para abarcar mente, cuerpo, disciplina, relaciones y más."
+        title: "Progreso visual",
+        description: "Tu avance se ve en cada semana, racha y hábito completado."
       },
       {
-        title: "Reflexión integrada",
-        description: "Rutinas, journal y feedback visual unidos en una experiencia mobile-first."
+        title: "Motivación calmada",
+        description: "XP, logros y recompensas ligeras para volver mañana con intención."
       }
     ],
     socialProof: {
@@ -120,10 +120,10 @@ export const landingContent = {
       },
       floatingBadges: [
         {
-          title: "Badge desbloqueado",
+          title: "Ritmo de mañana",
           subtitle: "3 mañanas seguidas",
           tone: "light",
-          icon: "+"
+          icon: "RM"
         },
         {
           title: "+12 XP",

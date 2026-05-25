@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import diarioScreenshot from "@/assets/screenshots/diario.jpeg";
 import semanalScreenshot from "@/assets/screenshots/semanal.jpeg";
+import { HeroAchievementBadge } from "@/components/sections/hero/hero-achievement-badge";
 import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 
@@ -58,17 +59,13 @@ export function HeroDevicePreview() {
         initial={prefersReducedMotion ? false : { opacity: 0, x: -12, y: 16 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.45, delay: prefersReducedMotion ? 0 : 0.22 }}
-        className="absolute left-0 top-[56%] z-30 max-w-[11rem] rounded-2xl border border-white/80 bg-white/92 px-4 py-3 shadow-soft backdrop-blur"
+        className="absolute left-0 top-[56%] z-30 max-w-[12.2rem]"
       >
-        <div className="flex items-center gap-3">
-          <span className="text-lg" aria-hidden="true">
-            {devicePanel.floatingBadges[0]?.icon}
-          </span>
-          <div>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-foreground">{devicePanel.floatingBadges[0]?.title}</p>
-            <p className="text-[0.68rem] text-muted-foreground">{devicePanel.floatingBadges[0]?.subtitle}</p>
-          </div>
-        </div>
+        <HeroAchievementBadge
+          title={devicePanel.floatingBadges[0]?.title ?? "Logro desbloqueado"}
+          subtitle={devicePanel.floatingBadges[0]?.subtitle ?? "Tu constancia se mantiene"}
+          iconLabel={devicePanel.floatingBadges[0]?.icon}
+        />
       </motion.div>
 
       <motion.div
