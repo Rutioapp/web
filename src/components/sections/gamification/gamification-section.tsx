@@ -6,22 +6,6 @@ import { AmberCard } from "@/components/sections/gamification/amber-card";
 import { StreakCard } from "@/components/sections/gamification/streak-card";
 import { landingContent } from "@/content/landing-content";
 
-const gamificationMetrics = [
-  {
-    shortLabel: "XP",
-    title: "Puntos de experiencia",
-    description: "Completa hábitos, sube de nivel y desbloquea avances sin fricción."
-  },
-  {
-    shortLabel: "AM",
-    title: "Moneda Ámbar",
-    description: "Gana Ámbar al cumplir hábitos y rachas, y úsalo para personalizar la app."
-  }
-] as const;
-
-const gamificationDescription =
-  "Rachas, XP y Ámbar convierten tu constancia en progreso visible y recompensas claras.";
-
 export function GamificationSection() {
   const section = landingContent.sections.gamification;
 
@@ -40,9 +24,9 @@ export function GamificationSection() {
 
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-strong">Moneda Ámbar</p>
-                <h3 className="mt-3 text-xl leading-7 text-foreground">Una recompensa simple y visible</h3>
+                <h3 className="mt-3 text-xl leading-7 text-foreground">Una recompensa calmada y tangible</h3>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  La ganas con tus hábitos diarios y la gastas en personalizar la experiencia.
+                  La ganas al sostener tu ritmo y la usas para personalizar Rutio sin presión ni ruido.
                 </p>
               </div>
             </div>
@@ -57,13 +41,13 @@ export function GamificationSection() {
               <span className="block">{section.title}</span>
               {section.highlight ? <em className="block font-normal italic text-brand">{section.highlight}</em> : null}
             </h2>
-            <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{gamificationDescription}</p>
+            <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{section.description}</p>
 
             <div className="mt-10 space-y-7">
-              {gamificationMetrics.map((metric, index) => (
+              {section.metrics.map((metric, index) => (
                 <article
                   key={metric.title}
-                  className={index === gamificationMetrics.length - 1 ? "flex gap-4" : "flex gap-4 border-b border-brand/12 pb-7"}
+                  className={index === section.metrics.length - 1 ? "flex gap-4" : "flex gap-4 border-b border-brand/12 pb-7"}
                 >
                   <span className="w-12 flex-shrink-0 font-display text-[1.9rem] font-light leading-none text-[#c9a84c]/55">{metric.shortLabel}</span>
                   <div>

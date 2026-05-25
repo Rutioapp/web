@@ -230,7 +230,7 @@ export const landingContent = {
       title: "Tu esfuerzo",
       highlight: "tiene valor real.",
       description:
-        "No es solo una racha que no quieres romper. Es una economía de recompensa que hace que quieras volver cada día.",
+        "Visualiza tu constancia, no solo una lista de tareas. Rutio convierte semanas, familias y rachas en señales claras para seguir con calma.",
       amber: {
         title: "Tu moneda · Ámbar",
         amount: "320",
@@ -260,14 +260,22 @@ export const landingContent = {
       },
       metrics: [
         {
-          shortLabel: "XP",
-          title: "Puntos de experiencia",
-          description: "Cada hábito completado sube tu nivel. Los hábitos difíciles dan más XP. Sube de nivel y desbloquea logros."
+          shortLabel: "VIS",
+          title: "Constancia visible en el tiempo",
+          description:
+            "Detecta patrones semanales y mensuales de un vistazo para entender qué hábitos sostienes de verdad."
         },
         {
-          shortLabel: "AM",
-          title: "Moneda Ámbar",
-          description: "La moneda interna de Rutio. Gánala completando hábitos y rachas. Gástala en la tienda para personalizar tu app."
+          shortLabel: "FAM",
+          title: "Equilibrio por familias",
+          description:
+            "Agrupa hábitos por familias y ve si tu energía está repartida entre mente, cuerpo, emoción y foco profesional."
+        },
+        {
+          shortLabel: "XP",
+          title: "Motivación calmada",
+          description:
+            "Suma XP, niveles y logros discretos. Recompensas pequeñas que celebran progreso real sin convertirlo en presión."
         }
       ]
     },
