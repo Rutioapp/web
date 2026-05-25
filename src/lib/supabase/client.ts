@@ -1,5 +1,59 @@
-export type SupabaseBrowserClient = null;
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-export function createSupabaseBrowserClient(): SupabaseBrowserClient {
-  return null;
+export interface WaitlistSignupRow {
+  id: string;
+  created_at: string;
+  email: string;
+  name: string | null;
+  source: string | null;
+  message: string | null;
+  locale: string | null;
+  user_agent: string | null;
+}
+
+export type WaitlistSignupInsert = Omit<WaitlistSignupRow, "id" | "created_at">;
+
+export interface SupabaseDatabase {
+  public: {
+    Tables: {
+      waitlist_signups: {
+        Row: WaitlistSignupRow;
+        Insert: WaitlistSignupInsert;
+        Update: Partial<WaitlistSignupInsert>;
+        Relationships: [];
+      };
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
+  };
+}
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
+
+let browserClient: SupabaseClient | null = null;
+
+export type SupabaseBrowserClient = SupabaseClient;
+
+export function isSupabaseBrowserConfigured() {
+  return Boolean(supabaseUrl && supabaseAnonKey);
+}
+
+export function createSupabaseBrowserClient(): SupabaseBrowserClient | null {
+  if (!isSupabaseBrowserConfigured()) {
+    return null;
+  }
+
+  if (!browserClient) {
+    browserClient = createClient(supabaseUrl!, supabaseAnonKey!, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false
+      }
+    });
+  }
+
+  return browserClient;
 }
