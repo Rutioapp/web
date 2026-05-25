@@ -18,9 +18,19 @@ export interface HeroSocialProofAvatar {
   color: string;
 }
 
+export interface HeroSmartCounterContent {
+  title: string;
+  fallbackValue: number;
+  metricLabel: string;
+  contextLabel: string;
+  loadingLabel: string;
+  fallbackHint: string;
+  errorHint: string;
+}
+
 export interface HeroSocialProof {
-  summary: string;
   detail: string;
+  counter: HeroSmartCounterContent;
   avatars: HeroSocialProofAvatar[];
 }
 

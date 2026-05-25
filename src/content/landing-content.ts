@@ -46,8 +46,16 @@ export const landingContent = {
       }
     ],
     socialProof: {
-      summary: "+30 personas ya en lista de espera",
-      detail: "Plazas limitadas para la beta privada inicial.",
+      detail: "Seguimos validando con cupos reducidos para mantener una beta cuidada.",
+      counter: {
+        title: "Progreso de beta",
+        fallbackValue: 30,
+        metricLabel: "rutinas iniciadas",
+        contextLabel: "en la beta privada",
+        loadingLabel: "Actualizando progreso de la beta",
+        fallbackHint: "Dato de referencia mientras conectamos el contador en tiempo real.",
+        errorHint: "Mostrando un valor de referencia estable."
+      },
       avatars: [
         { name: "Alba M.", initials: "A", color: "122 158 126" },
         { name: "Marc T.", initials: "M", color: "184 137 90" },
