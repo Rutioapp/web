@@ -12,8 +12,8 @@ export function GamificationSection() {
   return (
     <section className="py-20 sm:py-24 lg:py-28">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-16">
-          <div className="order-2 space-y-4 lg:order-1">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-14 xl:gap-16">
+          <div className="order-2 space-y-4 lg:order-1 lg:space-y-5">
             <AmberCard />
             <StreakCard />
 

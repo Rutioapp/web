@@ -36,7 +36,7 @@ export function FamilyCard({ family }: FamilyCardProps) {
 
   return (
     <article
-      className="group relative min-h-[11.5rem] overflow-hidden rounded-[1.7rem] border px-5 py-6 text-left backdrop-blur-[2px] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:border-background/16 hover:bg-background/[0.07] hover:shadow-[0_24px_48px_rgba(0,0,0,0.22)] sm:px-6 sm:py-7"
+      className="group relative h-full min-h-[11.5rem] overflow-hidden rounded-[1.7rem] border px-5 py-6 text-left backdrop-blur-[2px] transition-all duration-300 ease-out hover:-translate-y-[2px] hover:border-background/16 hover:bg-background/[0.07] hover:shadow-[0_24px_48px_rgba(0,0,0,0.22)] sm:px-6 sm:py-7"
       style={cardStyle}
     >
       <div className="pointer-events-none absolute inset-0 opacity-95" style={tintStyle} aria-hidden="true" />

@@ -8,7 +8,7 @@ export function BetaSection() {
   return (
     <section id="beta" className="py-20 sm:py-24 lg:py-28">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] lg:items-start lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:items-start lg:gap-14 xl:gap-16">
           <div>
             <p className="mb-5 flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-brand-strong">
               <span className="h-px w-6 bg-brand/80" />
@@ -25,7 +25,7 @@ export function BetaSection() {
               <span>{section.spotsLabel}</span>
             </div>
 
-            <div className="mt-10 space-y-4">
+            <div className="mt-10 max-w-xl space-y-4">
               {section.benefits.map((benefit) => (
                 <div key={benefit.label} className="flex items-center gap-3">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#c9a84c]/25 bg-[#c9a84c]/10 text-sm text-brand-strong">
@@ -37,7 +37,9 @@ export function BetaSection() {
             </div>
           </div>
 
-          <BetaForm />
+          <div className="lg:justify-self-end lg:w-full lg:max-w-[35rem]">
+            <BetaForm />
+          </div>
         </div>
       </Container>
     </section>

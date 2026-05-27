@@ -6,7 +6,7 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <article className="rounded-[1.6rem] border border-brand/12 bg-white p-6 shadow-soft">
+    <article className="flex h-full flex-col rounded-[1.6rem] border border-brand/12 bg-white p-6 shadow-soft">
       <div className="mb-4 flex gap-1 text-[#c9a84c]" aria-label="5 estrellas">
         {Array.from({ length: 5 }).map((_, index) => (
           <span key={index} aria-hidden="true">
@@ -14,7 +14,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
           </span>
         ))}
       </div>
-      <blockquote className="font-display text-[1.18rem] italic leading-8 text-foreground">“{testimonial.quote}”</blockquote>
+      <blockquote className="flex-1 font-display text-[1.18rem] italic leading-8 text-foreground">“{testimonial.quote}”</blockquote>
       <div className="mt-5 flex items-center gap-3">
         <span
           className="inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-white"

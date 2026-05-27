@@ -119,7 +119,7 @@ export function BetaForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-busy={isSubmitting} className="rounded-[1.8rem] border border-brand/15 bg-white p-6 shadow-soft sm:p-8">
+    <form onSubmit={handleSubmit} noValidate aria-busy={isSubmitting} className="rounded-[1.8rem] border border-brand/15 bg-white p-6 shadow-soft sm:p-8 lg:p-9">
       <h3 className="text-[1.9rem] leading-8 text-foreground">{formContent.title}</h3>
       <p className="mt-2 text-sm leading-6 text-muted-foreground">{formContent.subtitle}</p>
 
@@ -269,4 +269,3 @@ export function BetaForm() {
     </form>
   );
 }
-

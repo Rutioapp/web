@@ -7,13 +7,13 @@ export function HeroCopy() {
   const { hero } = landingContent;
 
   return (
-    <div className="relative z-10 max-w-xl">
+    <div className="relative z-10 max-w-xl lg:max-w-[39rem]">
       <div className="mb-8 inline-flex items-center gap-3 sm:mb-9">
         <span className="h-px w-8 bg-brand/80" />
         <span className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-brand-strong">{hero.eyebrow}</span>
       </div>
 
-      <h1 className="text-balance font-display text-[3.2rem] font-light leading-[0.92] text-foreground sm:text-[4.4rem] lg:text-[5.2rem]">
+      <h1 className="text-balance font-display text-[3.2rem] font-light leading-[0.92] text-foreground sm:text-[4.4rem] lg:text-[4.95rem] xl:text-[5.2rem]">
         <span className="block">{hero.titleLead}</span>
         <span className="block">
           {hero.titleAccentPrefix} <em className="font-normal italic text-brand">{hero.titleAccent}</em>
@@ -21,7 +21,7 @@ export function HeroCopy() {
         <strong className="block font-semibold not-italic">{hero.titleStrong}</strong>
       </h1>
 
-      <p className="mt-6 max-w-[30rem] text-pretty text-base leading-8 text-muted-foreground sm:text-[1.05rem]">
+      <p className="mt-6 max-w-[34rem] text-pretty text-base leading-8 text-muted-foreground sm:text-[1.05rem]">
         {hero.description}
       </p>
 
@@ -39,9 +39,9 @@ export function HeroCopy() {
         </InPageLink>
       </div>
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-3" id="hero-foundations">
+      <div className="mt-8 grid gap-3 sm:grid-cols-3 sm:items-stretch lg:gap-4" id="hero-foundations">
         {hero.highlights.map((item) => (
-          <article key={item.title} className="rounded-[1.5rem] border border-line/70 bg-white/60 p-4 shadow-soft backdrop-blur">
+          <article key={item.title} className="h-full rounded-[1.5rem] border border-line/70 bg-white/60 p-4 shadow-soft backdrop-blur">
             <h3 className="text-base leading-6 text-foreground">{item.title}</h3>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
           </article>

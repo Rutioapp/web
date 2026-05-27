@@ -40,11 +40,11 @@ const howItWorksSteps: HowItWorksStep[] = landingContent.sections.howItWorks.ste
 function StepVisualCard({ step }: { step: HowItWorksStep }) {
   return (
     <div className="mt-6 rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
-      <div className="mx-auto max-w-[18rem] rounded-[2.1rem] border border-dashed border-brand/25 bg-white/70 p-5 shadow-soft">
+      <div className="mx-auto flex min-h-[14rem] max-w-[18rem] flex-col rounded-[2.1rem] border border-dashed border-brand/25 bg-white/70 p-5 shadow-soft sm:min-h-[14.5rem] sm:max-w-[19rem] sm:p-6">
         <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{step.visual.badge}</p>
         <h4 className="mt-3 text-lg leading-6 text-foreground">{step.visual.title}</h4>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.visual.description}</p>
-        <p className="mt-4 text-xs leading-5 text-muted-foreground/90">{step.visual.helper}</p>
+        <p className="mt-auto pt-4 text-xs leading-5 text-muted-foreground/90">{step.visual.helper}</p>
       </div>
     </div>
   );
@@ -95,7 +95,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
   if (!activeStep) return null;
 
   return (
-    <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-16">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-14 xl:gap-16">
       <div>
         <p className="mb-5 flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-brand-strong">
           <span className="h-px w-6 bg-brand/80" />
@@ -109,7 +109,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
 
         <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{description}</p>
 
-        <div className="mt-10" role="tablist" aria-label="Pasos de cómo funciona Rutio" aria-orientation="vertical">
+        <div className="mt-10 lg:pr-2 xl:pr-4" role="tablist" aria-label="Pasos de cómo funciona Rutio" aria-orientation="vertical">
           <div className="flex flex-col gap-3">
             {howItWorksSteps.map((step, index) => {
               const isActive = step.id === activeStep.id;
@@ -215,7 +215,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
         </div>
       </div>
 
-      <div className="hidden lg:block">
+      <div className="hidden lg:block lg:pt-1">
         <AnimatePresence mode="wait" initial={false}>
           <motion.section
             key={activeStep.id}
@@ -223,7 +223,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
             role="tabpanel"
             aria-labelledby={`${tabsId}-tab-${activeStep.id}`}
             {...panelAnimation}
-            className="surface-card surface-glow overflow-hidden bg-white/60 p-4 sm:p-5"
+            className="surface-card surface-glow sticky top-24 overflow-hidden bg-white/60 p-4 sm:p-5"
           >
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
               <div>
