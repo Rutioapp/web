@@ -2,19 +2,36 @@ export const siteConfig = {
   name: "Rutio",
   shortName: "Rutio",
   description:
-    "Rutio te ayuda a crear hábitos sostenibles, visualizar tu progreso y mantener la motivación con una gamificación calmada.",
+    "Rutio te ayuda a crear habitos sostenibles, visualizar tu progreso y mantener la motivacion con una gamificacion calmada.",
   url: "https://rutio.app",
   locale: "es_ES",
+  footer: {
+    summary:
+      "Rutio es una app de habitos calmada y premium para construir constancia sostenible con progreso visual.",
+    betaStatus:
+      "Rutio esta en desarrollo. Unete a la beta para seguir el progreso y recibir novedades."
+  },
+  contact: {
+    email: "hello@rutio.app"
+  },
+  links: {
+    waitlist: "/#beta",
+    legal: {
+      privacy: "/privacy",
+      terms: "/terms"
+    },
+    social: [] as Array<{ label: string; href: string }>
+  },
   metadata: {
-    title: "Rutio — Hábitos visuales para construir constancia",
-    openGraphTitle: "Rutio — Construye hábitos con calma y constancia",
+    title: "Rutio - Habitos visuales para construir constancia",
+    openGraphTitle: "Rutio - Construye habitos con calma y constancia",
     openGraphDescription:
-      "Una app de hábitos visual, premium y calmada para seguir tu progreso, organizar familias de hábitos y celebrar pequeños avances.",
+      "Una app de habitos visual, premium y calmada para seguir tu progreso, organizar familias de habitos y celebrar pequenos avances.",
     ogImage: {
       url: "/images/og/og-default.svg",
       width: 1200,
       height: 630,
-      alt: "Vista previa de Rutio con enfoque en hábitos visuales y constancia calmada"
+      alt: "Vista previa de Rutio con enfoque en habitos visuales y constancia calmada"
     }
   }
 } as const;
