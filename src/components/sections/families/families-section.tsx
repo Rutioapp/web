@@ -8,7 +8,7 @@ export function FamiliesSection() {
   const secondRow = section.items.slice(4);
 
   return (
-    <section id="familias" className="relative overflow-hidden bg-foreground py-20 sm:py-24 lg:py-28">
+    <section id="familias" aria-labelledby="familias-heading" className="relative overflow-hidden bg-foreground py-20 sm:py-24 lg:py-28">
       <div className="pointer-events-none absolute left-1/2 top-[-18rem] h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl" />
       <Container className="relative z-10">
         <div className="mx-auto max-w-[46rem] text-center">
@@ -16,7 +16,7 @@ export function FamiliesSection() {
             <span className="h-px w-6 bg-background/30" />
             <span>{section.eyebrow}</span>
           </p>
-          <h2 className="text-balance text-[2.4rem] font-light leading-[1.02] text-background sm:text-[3.15rem] lg:text-[3.4rem]">
+          <h2 id="familias-heading" className="text-balance text-[2.4rem] font-light leading-[1.02] text-background sm:text-[3.15rem] lg:text-[3.4rem]">
             <span className="block">{section.title}</span>
             {section.highlight ? <em className="block font-normal italic text-brand">{section.highlight}</em> : null}
           </h2>

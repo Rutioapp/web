@@ -6,7 +6,7 @@ export function HowItWorksSection() {
   const section = landingContent.sections.howItWorks;
 
   return (
-    <section id="como-funciona" className="py-20 sm:py-24 lg:py-28">
+    <section id="como-funciona" aria-labelledby="como-funciona-heading" className="py-20 sm:py-24 lg:py-28">
       <Container>
         <HowItWorksTabs
           eyebrow={section.eyebrow}

@@ -102,7 +102,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
           <span>{eyebrow}</span>
         </p>
 
-        <h2 className="text-balance text-[2.5rem] font-light leading-[1.02] sm:text-[3.25rem] lg:text-[3.55rem]">
+        <h2 id="como-funciona-heading" className="text-balance text-[2.5rem] font-light leading-[1.02] sm:text-[3.25rem] lg:text-[3.55rem]">
           <span className="block">{title}</span>
           {highlight ? <em className="block font-normal italic text-brand">{highlight}</em> : null}
         </h2>

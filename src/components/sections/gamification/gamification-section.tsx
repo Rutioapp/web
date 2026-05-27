@@ -10,7 +10,7 @@ export function GamificationSection() {
   const section = landingContent.sections.gamification;
 
   return (
-    <section className="py-20 sm:py-24 lg:py-28">
+    <section aria-labelledby="gamificacion-heading" className="py-20 sm:py-24 lg:py-28">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-14 xl:gap-16">
           <div className="order-2 space-y-4 lg:order-1 lg:space-y-5">
@@ -37,7 +37,7 @@ export function GamificationSection() {
               <span className="h-px w-6 bg-brand/80" />
               <span>{section.eyebrow}</span>
             </p>
-            <h2 className="text-balance text-[2.5rem] font-light leading-[1.02] sm:text-[3.25rem] lg:text-[3.55rem]">
+            <h2 id="gamificacion-heading" className="text-balance text-[2.5rem] font-light leading-[1.02] sm:text-[3.25rem] lg:text-[3.55rem]">
               <span className="block">{section.title}</span>
               {section.highlight ? <em className="block font-normal italic text-brand">{section.highlight}</em> : null}
             </h2>

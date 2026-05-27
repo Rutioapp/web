@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 
-import { landingContent } from "@/content/landing-content";
 import { siteConfig } from "@/config/site";
+
+const defaultTitle = siteConfig.metadata.title;
+const defaultDescription = siteConfig.description;
+const openGraphImage = siteConfig.metadata.ogImage;
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Habitos premium y calmados`,
+    default: defaultTitle,
     template: `%s | ${siteConfig.name}`
   },
-  description: landingContent.hero.description,
+  description: defaultDescription,
   applicationName: siteConfig.name,
   alternates: {
     canonical: "/"
@@ -19,33 +22,19 @@ export const defaultMetadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} | Habitos premium y calmados`,
-    description: landingContent.hero.description,
-    images: [
-      {
-        url: "/images/og/og-default.svg",
-        width: 1200,
-        height: 630,
-        alt: "Vista previa de la landing de Rutio"
-      }
-    ]
+    title: siteConfig.metadata.openGraphTitle,
+    description: siteConfig.metadata.openGraphDescription,
+    images: [openGraphImage]
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Habitos premium y calmados`,
-    description: landingContent.hero.description,
-    images: ["/images/og/og-default.svg"]
+    title: siteConfig.metadata.openGraphTitle,
+    description: siteConfig.metadata.openGraphDescription,
+    images: [openGraphImage.url]
   },
   icons: {
-    icon: "/images/brand/rutio-mark.svg",
-    apple: "/images/brand/rutio-mark.svg"
-  },
-  keywords: [
-    "Rutio",
-    "app de habitos",
-    "habit tracker",
-    "mobile first",
-    "ios first",
-    "next.js landing"
-  ]
+    icon: [{ url: "/images/brand/rutio-mark.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/images/brand/rutio-mark.svg", type: "image/svg+xml" }],
+    shortcut: ["/images/brand/rutio-mark.svg"]
+  }
 };

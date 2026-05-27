@@ -13,7 +13,7 @@ export function HeroCopy() {
         <span className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-brand-strong">{hero.eyebrow}</span>
       </div>
 
-      <h1 className="text-balance font-display text-[3.2rem] font-light leading-[0.92] text-foreground sm:text-[4.4rem] lg:text-[4.95rem] xl:text-[5.2rem]">
+      <h1 id="hero-heading" className="text-balance font-display text-[3.2rem] font-light leading-[0.92] text-foreground sm:text-[4.4rem] lg:text-[4.95rem] xl:text-[5.2rem]">
         <span className="block">{hero.titleLead}</span>
         <span className="block">
           {hero.titleAccentPrefix} <em className="font-normal italic text-brand">{hero.titleAccent}</em>
