@@ -1,5 +1,7 @@
 ﻿import type { LandingContent } from "@/types/landing";
 
+import { siteConfig } from "@/config/site";
+
 export const landingContent = {
   announcement: "Beta privada 2026 · Acceso anticipado con plazas limitadas.",
   nav: {
@@ -416,7 +418,7 @@ export const landingContent = {
         links: [
           { label: "Privacy", href: "/privacy" },
           { label: "Terms", href: "/terms" },
-          { label: "hola@rutio.app", href: "mailto:hola@rutio.app" }
+          { label: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` }
         ]
       }
     ],

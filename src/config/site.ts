@@ -12,7 +12,7 @@ export const siteConfig = {
       "Rutio esta en desarrollo. Unete a la beta para seguir el progreso y recibir novedades."
   },
   contact: {
-    email: "hello@rutio.app"
+    email: "contact@rutioapp.com"
   },
   links: {
     waitlist: "/#beta",
