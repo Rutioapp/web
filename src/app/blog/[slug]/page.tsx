@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </p>
             ) : null}
 
-            <h1 className="mt-4 max-w-[18ch] text-balance text-[2.2rem] leading-[1.02] sm:text-[3rem]">{post.title}</h1>
+            <h1 className="mt-4 text-balance text-[2.2rem] leading-[1.02] sm:text-[3rem]">{post.title}</h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground sm:text-lg">{post.description}</p>
 
             <p className="mt-5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
@@ -136,13 +136,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <div className="story-divider my-8" />
 
-            <section className="space-y-4 rounded-[1.4rem] border border-line/80 bg-white/55 p-5 sm:p-6">
+            <section className="space-y-3">
               <h2 className="text-2xl leading-tight">Quieres seguir el progreso de Rutio?</h2>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
                 Si te interesa probar la app en beta privada, puedes dejar tu email y te avisaremos en la siguiente ola de acceso.
               </p>
-              <Link href={siteConfig.links.waitlist} className={buttonVariants({ size: "md", className: "w-full sm:w-auto" })}>
-                Unirme a la beta privada
+              <Link href={siteConfig.links.waitlist} className={buttonVariants({ size: "sm" })}>
+                Unirme a la beta
               </Link>
             </section>
           </article>
