@@ -8,6 +8,7 @@ import { InPageLink } from "@/components/ui/in-page-link";
 const productLinks = [
   { label: "Inicio", href: "/" },
   { label: "Como funciona", href: "/#como-funciona" },
+  { label: "Blog", href: "/blog" },
   { label: "Beta privada", href: siteConfig.links.waitlist }
 ] as const;
 

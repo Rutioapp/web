@@ -7,7 +7,8 @@ export const landingContent = {
   nav: {
     links: [
       { label: "Cómo funciona", href: "/#como-funciona" },
-      { label: "Familias", href: "/#familias" }
+      { label: "Familias", href: "/#familias" },
+      { label: "Blog", href: "/blog" }
     ],
     cta: {
       label: "Unirme a la beta privada",
@@ -410,6 +411,7 @@ export const landingContent = {
         links: [
           { label: "Inicio", href: "/" },
           { label: "Cómo funciona", href: "/#como-funciona" },
+          { label: "Blog", href: "/blog" },
           { label: "Beta", href: "/#beta" }
         ]
       },
