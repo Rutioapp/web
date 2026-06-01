@@ -56,28 +56,120 @@ Use only these categories for now:
 - Reading time: honest and not inflated.
 - Draft state: always `true` until the user explicitly asks to publish.
 
-## Image and Visual Rules for Blog Posts
-- Every real published post should include at least one visual recommendation.
-- Codex should decide the best placement based on article structure and reading flow.
-- Codex should always provide:
-  - visual concept
-  - placement
-  - alt text
-  - optional caption
-- If a real image file exists, use it through `visual.imageSrc`.
-- If no real image exists, do not invent a fake path.
-- Use a placeholder/concept card only when the blog renderer supports it.
-- No generic stock images.
-- No fake screenshots.
-- No childish illustrations.
-- No unrelated decorative images.
-- Preferred visuals:
-  - Rutio app mockups
-  - soft editorial illustrations
-  - simple conceptual diagrams
-  - before/after comparisons
-  - habit journey visuals
-  - calm split-screen concepts
+## Image Generation Workflow for Blog Posts
+Use this workflow for every future Rutio blog post task:
+1. User provides a raw draft.
+2. Codex creates or updates the post in the typed blog content model.
+3. Codex generates a complete image recommendation pack (copy-ready prompt included).
+4. User generates the image externally.
+5. User saves the real image in `public/images/blog/`.
+6. Codex integrates the real path into `visual.imageSrc`.
+
+### Visual Need Decision (Always Required)
+- Codex must always evaluate whether the post needs a visual.
+- Default expectation: real published posts should include one main visual recommendation.
+- Exception: text-only is allowed only when intentionally requested or clearly justified by editorial intent.
+
+### Required Visual Recommendation Pack
+For every future blog post task, Codex should return:
+- Visual concept
+- Best placement
+- Image generation prompt
+- Alt text
+- Optional caption
+- Suggested filename
+- Suggested public path
+- Integration note
+
+### Placement Options and Decision Rules
+Codex must choose one placement:
+- `after-title`
+- `after-intro`
+- `between-sections`
+- `near-conclusion`
+
+Decision rules:
+- `after-title`: best for strong editorial hero visuals.
+- `after-intro`: best when the introduction sets up the emotional problem first.
+- `between-sections`: best for comparison or diagram visuals.
+- `near-conclusion`: best for reflective closing visuals.
+
+### Image Prompt Rules (Copy-Ready)
+The image prompt should be ready to paste into an image generation tool and include:
+- Article topic
+- Core emotional idea
+- Composition
+- Visual style
+- Color palette
+- What to avoid
+- Format/aspect ratio recommendation
+- No logos
+- No watermarks
+- Minimal or no text inside the image
+- No fake UI unless explicitly requested
+- No generic stock image look
+
+Rutio visual style:
+- Calm
+- Premium
+- Soft
+- Editorial
+- iOS-first
+- Warm but not childish
+- Product-aware
+- Clean and modern
+- Generous negative space
+- Soft cream/lavender tones when appropriate
+
+Preferred visual types:
+- Rutio app mockups
+- Editorial illustrations
+- Split-screen comparisons
+- Simple conceptual diagrams
+- Habit journey visuals
+- Calm desk/lifestyle scenes
+- Before/after emotional contrast visuals
+- Product-inspired interface scenes
+
+Avoid:
+- Generic stock photography
+- Childish cartoons
+- Aggressive productivity visuals
+- Fake screenshots that look like real product screens unless approved by the user
+- Too much text inside the image
+- Logos or brand marks unless provided
+- Overpromising visuals
+- Medical or therapy implications
+
+### Asset Integration Rules
+- Codex should not invent image files.
+- Codex should not set `imageSrc` to a file that does not exist.
+- Codex should not add fake image paths.
+- If the image is not generated yet, provide the suggested path only as an integration plan.
+- Suggested file format: `public/images/blog/<slug>.webp`.
+- Public `imageSrc` format (only after real file exists): `/images/blog/<slug>.webp`.
+- Only after user confirmation that the file exists in `public/images/blog/`, Codex may set `visual.imageSrc`.
+
+### Public Rendering Rules
+- Do not show internal editorial notes publicly.
+- Do not show "Visual recomendado" on published posts.
+- Do not show visible "Texto alternativo:" labels.
+- Alt text belongs in the image `alt` attribute.
+- Caption may be visible only if it reads like editorial copy.
+- Concept-only visuals remain editorial metadata unless explicitly intended for drafts.
+
+### Example Output Format (For Future Tasks)
+```md
+Visual recommendation:
+- Concept: Gentle split-screen showing abandoned habit loops vs. calm Rutio weekly continuity.
+- Placement: after-intro
+- Image generation prompt: Editorial illustration for a Rutio blog post about why people abandon habits and how gentle consistency wins. Show a split-screen composition: left side chaotic, fragmented habit attempts; right side calm weekly progression with soft progress cues inspired by a premium iOS habit tracker. Style: calm, premium, clean editorial, modern minimalism, generous negative space, subtle depth, soft cream and muted lavender accents. Avoid logos, watermarks, heavy text overlays, fake screenshots, and generic stock-photo look. Format: 16:9 landscape.
+- Alt text: Split-screen visual contrasting chaotic abandoned habit attempts with calm, steady weekly habit continuity.
+- Caption: Sustainable consistency feels quieter than motivation spikes.
+- Suggested filename: abandoning-habits-consistency.webp
+- Suggested path: public/images/blog/abandoning-habits-consistency.webp
+- Integration note: Set `visual.imageSrc` to `/images/blog/abandoning-habits-consistency.webp` only after the real file is added.
+```
 
 ## Interaction Rules
 For now, do not add:
@@ -231,13 +323,20 @@ Requirements:
 - Generate a clean slug.
 - Keep draft: true unless I explicitly say publish.
 - Add a soft beta/waitlist CTA at the end.
-- Propose one clear visual concept aligned with the article.
-- Choose the best visual placement (`after-title`, `after-intro`, `between-sections`, or `near-conclusion`).
-- Add meaningful alt text in the same language as the post.
-- Add an optional caption when it improves context.
-- Integrate visual metadata into the post (`visual.type`, `visual.placement`, `visual.concept`, `visual.alt`, optional `visual.caption`, optional `visual.imageSrc`).
-- If a real image file exists, include `visual.imageSrc`.
-- If no real image exists, do not invent a fake path.
+- Always evaluate visual needs and provide one main visual recommendation unless intentionally text-only.
+- Choose one placement (`after-title`, `after-intro`, `between-sections`, or `near-conclusion`) using article-fit logic.
+- Generate a full image recommendation pack:
+  - visual concept
+  - placement
+  - copy-ready image generation prompt
+  - alt text (same language as the post)
+  - optional caption
+  - suggested filename
+  - suggested public path
+  - integration note
+- Integrate visual metadata into the post (`visual.type`, `visual.placement`, `visual.concept`, `visual.alt`, optional `visual.caption`).
+- Do not set `visual.imageSrc` until the real file exists in `public/images/blog/`.
+- Do not invent image files or fake image paths.
 - Do not add comments, likes, auth, newsletter backend or new dependencies.
 - Do not redesign the blog system.
 - Do not make unsupported claims.
@@ -263,8 +362,8 @@ Validation:
 Deliverables:
 - List changed files.
 - Summarize changes.
-- Confirm the post includes visual metadata.
-- Confirm no fake image path was added.
+- Confirm the post includes visual metadata plus a copy-ready image prompt.
+- Confirm no fake image file or image path was added.
 - Report validation commands and results.
 ```
 
