@@ -1,7 +1,12 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
 
+import { type BlogVisual } from "@/content/blog/posts";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { buttonVariants } from "@/components/ui/button";
@@ -12,6 +17,76 @@ import { formatBlogDate, getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
+}
+
+function getInlineVisualInsertionIndex(placement: BlogVisual["placement"], totalSections: number) {
+  if (totalSections === 0 || placement === "after-title") {
+    return null;
+  }
+
+  if (placement === "after-intro") {
+    return 1;
+  }
+
+  if (placement === "between-sections") {
+    return Math.max(1, Math.floor(totalSections / 2));
+  }
+
+  return Math.max(1, totalSections - 1);
+}
+
+function resolveExistingPublicImageSrc(imageSrc?: string) {
+  if (!imageSrc) {
+    return null;
+  }
+
+  const normalizedPath = imageSrc.replace(/^\//, "");
+  const absolutePath = join(process.cwd(), "public", normalizedPath);
+
+  if (existsSync(absolutePath)) {
+    return imageSrc;
+  }
+
+  if (imageSrc.endsWith(".webp")) {
+    const pngSrc = imageSrc.replace(/\.webp$/, ".png");
+    const pngAbsolutePath = join(process.cwd(), "public", pngSrc.replace(/^\//, ""));
+
+    if (existsSync(pngAbsolutePath)) {
+      return pngSrc;
+    }
+  }
+
+  return null;
+}
+
+function BlogVisualFigure({ visual }: { visual: BlogVisual }) {
+  const resolvedImageSrc = resolveExistingPublicImageSrc(visual.imageSrc);
+  const hasRealImage = Boolean(resolvedImageSrc);
+
+  return (
+    <figure className="my-8 overflow-hidden rounded-[1.65rem] border border-border/80 bg-white/70">
+      {hasRealImage ? (
+        <Image
+          src={resolvedImageSrc as string}
+          alt={visual.alt}
+          width={1440}
+          height={900}
+          sizes="(min-width: 1024px) 896px, (min-width: 640px) 88vw, 94vw"
+          className="h-auto w-full"
+        />
+      ) : (
+        <div className="space-y-4 bg-gradient-to-br from-brand/10 via-white to-brand/5 px-5 py-6 sm:px-7 sm:py-7">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">Visual recomendado</p>
+          <p className="text-base leading-7 text-foreground/90">{visual.concept}</p>
+          <p className="text-sm leading-6 text-muted-foreground">Este articulo incluye una propuesta visual editorial pendiente de produccion.</p>
+        </div>
+      )}
+
+      {visual.caption ? (
+        <figcaption className="px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-7">{visual.caption}</figcaption>
+      ) : null}
+    </figure>
+  );
 }
 
 export function generateStaticParams() {
@@ -63,6 +138,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const visual = post.visual;
+  const inlineVisualInsertionIndex = visual ? getInlineVisualInsertionIndex(visual.placement, post.content.length) : null;
+  const visualHasImage = Boolean(visual && resolveExistingPublicImageSrc(visual.imageSrc));
+  const canRenderVisual = Boolean(visual && (visualHasImage || post.draft));
+
+  const shouldRenderVisualAfterTitle = canRenderVisual && visual?.placement === "after-title";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -104,13 +186,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.readingTime ? ` · ${post.readingTime}` : ""}
             </p>
 
+            {shouldRenderVisualAfterTitle && visual ? <BlogVisualFigure visual={visual} /> : null}
+
             <div className="story-divider my-8" />
 
             <div className="space-y-8 text-base leading-8 text-foreground/90">
               {post.content.map((section, index) => {
-                if (section.type === "list") {
-                  return (
-                    <section key={`${post.slug}-section-${index}`} className="space-y-4">
+                const sectionNode =
+                  section.type === "list" ? (
+                    <section className="space-y-4">
                       <h2 className="text-2xl leading-tight">{section.heading}</h2>
                       <ul className="list-disc space-y-2 pl-5 text-muted-foreground">
                         {section.items.map((item) => (
@@ -118,18 +202,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         ))}
                       </ul>
                     </section>
+                  ) : (
+                    <section className="space-y-4">
+                      {section.heading ? <h2 className="text-2xl leading-tight">{section.heading}</h2> : null}
+                      <div className="space-y-4 text-muted-foreground">
+                        {section.paragraphs.map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
+                    </section>
                   );
-                }
+
+                const shouldRenderInlineVisual = canRenderVisual && visual && !shouldRenderVisualAfterTitle && inlineVisualInsertionIndex === index + 1;
 
                 return (
-                  <section key={`${post.slug}-section-${index}`} className="space-y-4">
-                    {section.heading ? <h2 className="text-2xl leading-tight">{section.heading}</h2> : null}
-                    <div className="space-y-4 text-muted-foreground">
-                      {section.paragraphs.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                  </section>
+                  <Fragment key={`${post.slug}-section-${index}`}>
+                    {sectionNode}
+                    {shouldRenderInlineVisual ? <BlogVisualFigure visual={visual} /> : null}
+                  </Fragment>
                 );
               })}
             </div>
@@ -158,4 +248,3 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </>
   );
 }
-

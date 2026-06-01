@@ -1,4 +1,4 @@
-﻿export type BlogSection =
+export type BlogSection =
   | {
       type: "paragraphs";
       heading?: string;
@@ -10,6 +10,15 @@
       items: string[];
     };
 
+export interface BlogVisual {
+  type: "hero" | "inline" | "concept";
+  placement: "after-title" | "after-intro" | "between-sections" | "near-conclusion";
+  concept: string;
+  alt: string;
+  caption?: string;
+  imageSrc?: string;
+}
+
 export interface BlogPost {
   title: string;
   slug: string;
@@ -20,6 +29,7 @@ export interface BlogPost {
   category?: string;
   tags?: string[];
   draft?: boolean;
+  visual?: BlogVisual;
   content: BlogSection[];
 }
 
@@ -34,6 +44,15 @@ export const blogPosts: BlogPost[] = [
     category: "Habits",
     tags: ["hábitos", "consistencia", "rutio"],
     draft: false,
+    visual: {
+      type: "concept",
+      placement: "after-intro",
+      concept:
+        "Un visual sereno en pantalla dividida que contraste una app de hábitos centrada en rachas rotas con una vista de recuperación y progreso gradual en Rutio.",
+      alt: "Comparativa visual entre una app de hábitos centrada en una racha rota y una experiencia más calmada de recuperación y progreso inspirada en Rutio.",
+      caption: "Los hábitos no se construyen en rachas perfectas, sino en la capacidad de volver después de fallar.",
+      imageSrc: "/images/blog/image_blog1.png"
+    },
     content: [
       {
         type: "paragraphs",

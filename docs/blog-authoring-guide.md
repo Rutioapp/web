@@ -33,7 +33,7 @@ Each post should include:
 - Published date
 - Optional updated date
 - Reading time if manually set and honest
-- Optional hero image concept
+- At least one visual recommendation (`visual`) for real published posts
 - Introduction
 - Main sections with clear headings
 - Optional highlighted insight block when useful
@@ -54,15 +54,30 @@ Use only these categories for now:
 - Slug: lowercase, readable, and URL-safe (letters, numbers, hyphens).
 - Published date: `YYYY-MM-DD`.
 - Reading time: honest and not inflated.
-- Hero image: optional.
 - Draft state: always `true` until the user explicitly asks to publish.
 
-## Image Rules
+## Image and Visual Rules for Blog Posts
+- Every real published post should include at least one visual recommendation.
+- Codex should decide the best placement based on article structure and reading flow.
+- Codex should always provide:
+  - visual concept
+  - placement
+  - alt text
+  - optional caption
+- If a real image file exists, use it through `visual.imageSrc`.
+- If no real image exists, do not invent a fake path.
+- Use a placeholder/concept card only when the blog renderer supports it.
 - No generic stock images.
-- Prefer Rutio mockups, product visuals, soft illustrations, comparison visuals, or simple diagrams.
-- Maximum: one hero image plus one or two inline visual suggestions.
-- If no image exists, provide a clear image concept instead of inventing a file path.
-- Do not add fake screenshots.
+- No fake screenshots.
+- No childish illustrations.
+- No unrelated decorative images.
+- Preferred visuals:
+  - Rutio app mockups
+  - soft editorial illustrations
+  - simple conceptual diagrams
+  - before/after comparisons
+  - habit journey visuals
+  - calm split-screen concepts
 
 ## Interaction Rules
 For now, do not add:
@@ -83,6 +98,12 @@ Do include:
 - Avoid keyword stuffing.
 - Avoid repeating the same phrase across headings.
 - Keep metadata honest and aligned with the actual article.
+- Do not add fake Open Graph images or invented hero image paths.
+
+## Accessibility Rules
+- Real images must have meaningful alt text.
+- Visual concept cards must be readable and informative, not purely decorative.
+- Do not rely on image alone to explain the article.
 
 ## Editorial Transformation Rules
 When a user provides a raw draft:
@@ -109,28 +130,38 @@ Current model in `src/content/blog/posts.ts`:
   - `title: string`
   - `slug: string`
   - `description: string`
-  - `date: string` (this is the published date field)
+  - `date: string` (published date)
   - `updatedAt?: string`
   - `readingTime?: string`
   - `category?: string`
   - `tags?: string[]`
   - `draft?: boolean`
+  - `visual?: BlogVisual`
   - `content: BlogSection[]`
+- `BlogVisual` fields:
+  - `type: "hero" | "inline" | "concept"`
+  - `placement: "after-title" | "after-intro" | "between-sections" | "near-conclusion"`
+  - `concept: string`
+  - `alt: string`
+  - `caption?: string`
+  - `imageSrc?: string`
 - `BlogSection` supports:
   - `type: "paragraphs"` with `paragraphs: string[]` and optional `heading`
   - `type: "list"` with `heading` and `items: string[]`
 
-Important alignment note:
-- If a request says `publishedAt`, map it to the real field `date`.
+Important alignment notes:
+- If a request says `publishedAt`, map it to `date`.
 - Keep `draft: true` by default unless the user explicitly requests publish.
+- Keep `imageSrc` optional. Never invent file paths.
 
 ## How to Add a New Post
 1. Open `src/content/blog/posts.ts`.
 2. Append a new `BlogPost` object inside `blogPosts`.
 3. Use the required metadata and `content` sections.
-4. Keep the article typed with `BlogSection[]` (`paragraphs` and/or `list` blocks).
-5. Keep `draft: true` unless explicitly told to publish.
-6. Do not change `src/lib/blog.ts` unless routing/filter behavior is explicitly requested.
+4. Include `visual` metadata with concept, placement, alt text, and optional caption.
+5. Use `visual.imageSrc` only when a real image asset exists.
+6. Keep `draft: true` unless explicitly told to publish.
+7. Do not change `src/lib/blog.ts` unless routing/filter behavior is explicitly requested.
 
 Example structure:
 
@@ -145,6 +176,14 @@ Example structure:
   category: "Building in public",
   tags: ["habits", "rutio", "consistency"], // optional
   draft: true,
+  visual: {
+    type: "concept",
+    placement: "after-intro",
+    concept: "Describe the planned visual clearly and specifically.",
+    alt: "Meaningful alt text describing what the image should communicate.",
+    caption: "Optional short caption that adds context."
+    // imageSrc: "/images/blog/my-real-image.jpg" // only when real file exists
+  },
   content: [
     {
       type: "paragraphs",
@@ -169,14 +208,6 @@ Example structure:
         "Takeaway two.",
         "Takeaway three."
       ]
-    },
-    {
-      type: "paragraphs",
-      heading: "Join the beta",
-      paragraphs: [
-        "Soft closing paragraph.",
-        "Low-pressure waitlist CTA paragraph."
-      ]
     }
   ]
 }
@@ -200,9 +231,15 @@ Requirements:
 - Generate a clean slug.
 - Keep draft: true unless I explicitly say publish.
 - Add a soft beta/waitlist CTA at the end.
-- Suggest a hero image concept if no image is provided.
+- Propose one clear visual concept aligned with the article.
+- Choose the best visual placement (`after-title`, `after-intro`, `between-sections`, or `near-conclusion`).
+- Add meaningful alt text in the same language as the post.
+- Add an optional caption when it improves context.
+- Integrate visual metadata into the post (`visual.type`, `visual.placement`, `visual.concept`, `visual.alt`, optional `visual.caption`, optional `visual.imageSrc`).
+- If a real image file exists, include `visual.imageSrc`.
+- If no real image exists, do not invent a fake path.
 - Do not add comments, likes, auth, newsletter backend or new dependencies.
-- Do not change the blog system.
+- Do not redesign the blog system.
 - Do not make unsupported claims.
 - Create or update the post in the correct blog content location.
 
@@ -219,18 +256,19 @@ Style requirements:
 - Make it useful for future Codex prompts.
 
 Validation:
-- Since this is documentation-only, no build is required unless source code was changed.
-- Confirm no app/source code was changed.
+- Run `npm run build` if source code changed.
+- Run `npm run lint` if available.
 - Confirm no env files were modified.
 
 Deliverables:
-- Create docs/blog-authoring-guide.md.
-- Summarize what the guide contains.
-- Confirm it matches the existing blog content model.
-- Confirm no source code/env files were changed.
+- List changed files.
+- Summarize changes.
+- Confirm the post includes visual metadata.
+- Confirm no fake image path was added.
+- Report validation commands and results.
 ```
 
 ## Validation Expectations for This Task Type
 - Documentation-only updates do not require `npm run build` unless source code changed.
-- Confirm only docs files were modified.
+- Confirm only docs files were modified when applicable.
 - Confirm no env files were modified.
