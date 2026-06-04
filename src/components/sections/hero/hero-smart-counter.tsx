@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 
-import { fetchHeroSmartCounterSnapshot } from "@/lib/counters/hero-smart-counter-service";
+import {
+  fetchHeroSmartCounterSnapshot,
+  WAITLIST_COUNT_UPDATED_EVENT
+} from "@/lib/counters/hero-smart-counter-service";
 import type { HeroSmartCounterContent } from "@/types/landing";
 
 interface SmartCounterState {
   status: "loading" | "ready" | "error";
-  snapshot: { value: number } | null;
+  count: number | null;
 }
 
 const counterFormatter = new Intl.NumberFormat("es-ES");
@@ -19,50 +22,45 @@ interface HeroSmartCounterProps {
 export function HeroSmartCounter({ content }: HeroSmartCounterProps) {
   const [state, setState] = useState<SmartCounterState>({
     status: "loading",
-    snapshot: null
+    count: null
   });
 
   useEffect(() => {
-    let isMounted = true;
-
     async function hydrateCounter() {
       try {
         const snapshot = await fetchHeroSmartCounterSnapshot();
 
-        if (!isMounted) {
-          return;
-        }
-
         setState({
-          status: "ready",
-          snapshot: snapshot ? { value: snapshot.value } : null
+          status: snapshot ? "ready" : "error",
+          count: snapshot?.value ?? null
         });
       } catch {
-        if (!isMounted) {
-          return;
-        }
-
         setState({
           status: "error",
-          snapshot: null
+          count: null
         });
       }
     }
 
     hydrateCounter();
 
+    function handleWaitlistRefresh() {
+      hydrateCounter();
+    }
+
+    window.addEventListener(WAITLIST_COUNT_UPDATED_EVENT, handleWaitlistRefresh);
+
     return () => {
-      isMounted = false;
+      window.removeEventListener(WAITLIST_COUNT_UPDATED_EVENT, handleWaitlistRefresh);
     };
   }, []);
 
-  const hint = state.status === "error" ? content.errorHint : "";
-  const count = state.snapshot ? counterFormatter.format(state.snapshot.value) : null;
+  const count = state.count !== null ? counterFormatter.format(state.count) : null;
 
   return (
     <article className="rounded-[1.2rem] border border-line/70 bg-white/65 p-4 shadow-soft backdrop-blur">
       <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong/85">{content.title}</p>
-      <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm leading-6 text-muted-foreground">
+      <div className="mt-2 flex min-h-8 flex-wrap items-baseline gap-x-2 gap-y-1 text-sm leading-6 text-muted-foreground">
         {state.status === "loading" ? (
           <>
             <span aria-hidden="true" className="inline-flex h-8 w-36 animate-pulse rounded-md bg-brand/15" />
@@ -70,16 +68,17 @@ export function HeroSmartCounter({ content }: HeroSmartCounterProps) {
               {content.loadingLabel}
             </span>
           </>
-        ) : count ? (
+        ) : state.status === "ready" && state.count === 0 ? (
+          <span className="font-display text-[1.45rem] font-light leading-6 text-foreground">{content.zeroLabel}</span>
+        ) : state.status === "ready" && state.count !== null ? (
           <>
             <span className="font-display text-[1.6rem] font-light leading-none text-foreground tabular-nums">{count}</span>
-            <span className="text-muted-foreground/85">{content.liveLabel}</span>
+            <span className="text-muted-foreground/85">personas apuntadas a la beta</span>
           </>
         ) : (
-          <span className="font-display text-[1.6rem] font-light leading-none text-foreground">{content.fallbackLabel}</span>
+          <span className="font-display text-[1.45rem] font-light leading-6 text-foreground">{content.fallbackLabel}</span>
         )}
       </div>
-      {hint ? <p className="mt-2 text-xs leading-5 text-muted-foreground/95">{hint}</p> : null}
     </article>
   );
 }

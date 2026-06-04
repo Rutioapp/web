@@ -51,10 +51,9 @@ export const landingContent = {
     socialProof: {
       counter: {
         title: "Beta privada",
-        liveLabel: "Personas apuntándose a la beta",
-        fallbackLabel: "Beta privada en preparación",
         loadingLabel: "Preparando la referencia de la beta",
-        errorHint: "Mostrando el estado actual de la beta."
+        zeroLabel: "Primeras personas apuntándose a la beta",
+        fallbackLabel: "Beta privada en preparación"
       },
       avatars: [
         { name: "Alba M.", initials: "A", color: "122 158 126" },
@@ -325,7 +324,7 @@ export const landingContent = {
       ],
       form: {
         title: "Solicita acceso",
-        subtitle: "Te avisamos cuando tu invitación esté lista. Abrimos nuevas plazas progresivamente, sin spam.",
+        subtitle: "Te avisamos cuando tu invitación esté lista. Abrimos acceso por oleadas, sin spam.",
         fields: {
           firstName: "Nombre (opcional)",
           lastName: "Apellido (opcional)",
