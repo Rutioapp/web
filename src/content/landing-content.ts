@@ -169,7 +169,21 @@ export const landingContent = {
             badge: "Flujo guiado",
             title: "Alta de hábito guiada",
             description: "Definición breve de nombre, familia, seguimiento y frecuencia para empezar sin fricción.",
-            helper: "Diseñado para arrancar en pocos pasos y mantener claridad desde el primer día."
+            helper: "Diseñado para arrancar en pocos pasos y mantener claridad desde el primer día.",
+            screenshots: [
+              {
+                src: "/images/screenshots/rutio-home-today.png",
+                alt: "Pantalla Home Today de Rutio con hábitos del día y progreso visible."
+              },
+              {
+                src: "/images/screenshots/rutio-create-habit-1.png",
+                alt: "Pantalla de crear hábito de Rutio con campos de configuración inicial."
+              },
+              {
+                src: "/images/screenshots/rutio-create-habit-2.png",
+                alt: "Pantalla de crear hábito de Rutio con revisión final del nuevo hábito."
+              }
+            ]
           }
         },
         {
@@ -183,10 +197,32 @@ export const landingContent = {
             title: "Registro rápido en Today",
             description: "Acciones directas para completar hábitos y ajustar progreso desde una única vista.",
             helper: "Interacción pensada para mantener ritmo diario sin saturación.",
-            screenshot: {
-              asset: "diario",
-              alt: "Pantalla diaria de Rutio con hábitos organizados y acciones rápidas de seguimiento."
-            }
+            screenshots: [
+              {
+                src: "/images/screenshots/rutio-habit-detail-1.png",
+                alt: "Pantalla de detalle de hábito de Rutio con progreso y acciones rápidas."
+              },
+              {
+                src: "/images/screenshots/rutio-habit-detail-2.png",
+                alt: "Pantalla de detalle de hábito de Rutio con seguimiento y controles de avance."
+              },
+              {
+                src: "/images/screenshots/rutio-habit-detail-3.png",
+                alt: "Pantalla de detalle de hábito de Rutio con información de seguimiento más completa."
+              },
+              {
+                src: "/images/screenshots/rutio-diary-1.png",
+                alt: "Pantalla de diario de Rutio con registro de hábitos y contexto del día."
+              },
+              {
+                src: "/images/screenshots/rutio-diary-2.png",
+                alt: "Pantalla de diario de Rutio con seguimiento y notas del día."
+              },
+              {
+                src: "/images/screenshots/rutio-diary-3.png",
+                alt: "Pantalla de diario de Rutio con un estado más detallado del progreso."
+              }
+            ]
           }
         },
         {
@@ -200,10 +236,16 @@ export const landingContent = {
             title: "Semana y mes en contexto",
             description: "Lectura clara de progreso, rachas y equilibrio por familias activas.",
             helper: "Ayuda a detectar patrones y tomar decisiones con perspectiva.",
-            screenshot: {
-              asset: "estadisticas",
-              alt: "Pantalla de estadísticas de Rutio con consistencia semanal y progreso visual."
-            }
+            screenshots: [
+              {
+                src: "/images/screenshots/rutio-statistics-1.png",
+                alt: "Pantalla de estadísticas de Rutio con consistencia semanal y progreso visual."
+              },
+              {
+                src: "/images/screenshots/rutio-statistics-2.png",
+                alt: "Pantalla de estadísticas de Rutio con una vista alternativa de consistencia y tendencias."
+              }
+            ]
           }
         },
         {
@@ -216,33 +258,24 @@ export const landingContent = {
             badge: "En evolución",
             title: "XP, nivel y logro del día",
             description: "Recompensas sutiles para reforzar la continuidad sin convertir la experiencia en presión.",
-            helper: "Estamos afinando esta capa para que acompañe el hábito con un tono sereno."
+            helper: "Estamos afinando esta capa para que acompañe el hábito con un tono sereno.",
+            screenshots: [
+              {
+                src: "/images/screenshots/rutio-gamification-1.png",
+                alt: "Pantalla de gamificación de Rutio con XP, racha y progreso de recompensa."
+              },
+              {
+                src: "/images/screenshots/rutio-gamification-2.png",
+                alt: "Pantalla de gamificación de Rutio con logros y acumulación de ámbar."
+              },
+              {
+                src: "/images/screenshots/rutio-gamification-3.png",
+                alt: "Pantalla de gamificación de Rutio con recompensas y progresión visual."
+              }
+            ]
           }
         }
-      ],
-      gallery: {
-        primary: {
-          eyebrow: "Screenshots del flujo",
-          title: "Creación / Today / Celebración",
-          description:
-            "Pantalla de creación de hábito, vista Today con hábito activo y celebración de completado con frase motivacional.",
-          height: "lg"
-        },
-        secondary: [
-          {
-            eyebrow: "Vista diario",
-            title: "Journal con prompt del día",
-            description: "Espacio pensado para registrar sensaciones, aprendizajes y patrones semanales.",
-            height: "md"
-          },
-          {
-            eyebrow: "Rutinas",
-            title: "Library de hábitos y packs",
-            description: "Exploración clara de rutinas listas para usar, editables y preparadas para crecer.",
-            height: "md"
-          }
-        ]
-      }
+      ]
     },
     families: {
       eyebrow: "Las 7 familias",

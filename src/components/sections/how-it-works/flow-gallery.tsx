@@ -1,115 +1,167 @@
-﻿import Image, { type StaticImageData } from "next/image";
+"use client";
 
-import diarioScreenshot from "@/assets/screenshots/diario.jpeg";
-import estadisticasScreenshot from "@/assets/screenshots/estadisticas.jpeg";
-import mensualScreenshot from "@/assets/screenshots/mensual.jpeg";
-import semanalScreenshot from "@/assets/screenshots/semanal.jpeg";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
-interface ScreenshotCard {
-  eyebrow: string;
-  title: string;
-  description: string;
-  image: StaticImageData;
+export interface ScreenshotCarouselSlide {
+  src: string;
   alt: string;
 }
 
-const featuredScreenshot: ScreenshotCard = {
-  eyebrow: "Estadísticas",
-  title: "Seguimiento visual que invita a volver",
-  description:
-    "Rutio muestra progreso, consistencia y rachas en una pantalla clara para entender qué está funcionando sin perder el tono cálido del producto.",
-  image: estadisticasScreenshot,
-  alt: "Pantalla de estadísticas de Rutio con progreso semanal, consistencia y racha actual."
-};
-
-const secondaryScreenshots: ScreenshotCard[] = [
-  {
-    eyebrow: "Diario",
-    title: "Tu día, listo para actuar",
-    description: "Una lista directa de hábitos para completar sin fricción, con progreso visible y acciones rápidas.",
-    image: diarioScreenshot,
-    alt: "Pantalla diaria de Rutio con hábitos organizados para el día."
-  },
-  {
-    eyebrow: "Semanal",
-    title: "La semana entera, de un vistazo",
-    description: "Una cuadrícula sencilla para detectar ritmo, huecos y constancia real durante los últimos días.",
-    image: semanalScreenshot,
-    alt: "Pantalla semanal de Rutio con una cuadrícula de hábitos completados."
-  },
-  {
-    eyebrow: "Mensual",
-    title: "Perspectiva mensual sin perder foco",
-    description: "Calendario mensual para revisar avance, hábitos activos y mejores rachas desde una vista más amplia.",
-    image: mensualScreenshot,
-    alt: "Pantalla mensual de Rutio con calendario y resumen de hábitos."
-  }
-];
-
-function ScreenshotFrame({
-  eyebrow,
-  title,
-  description,
-  image,
-  alt,
-  className
-}: ScreenshotCard & { className?: string }) {
-  return (
-    <article className={cn("surface-card surface-glow overflow-hidden bg-white/55 p-4 sm:p-5", className)}>
-      <div className="mb-4 flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{eyebrow}</p>
-          <h3 className="mt-2 text-xl leading-6 text-foreground">{title}</h3>
-        </div>
-        <span className="hidden rounded-full border border-brand/15 bg-white/80 px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground sm:inline-flex">
-          App real
-        </span>
-      </div>
-
-      <div className="mx-auto max-w-[12rem] overflow-hidden rounded-[1.8rem] border border-white/80 bg-[#f6efe3] p-1 shadow-soft">
-        <Image src={image} alt={alt} sizes="(min-width: 1024px) 192px, (min-width: 640px) 176px, 240px" className="h-auto w-full rounded-[1.4rem]" />
-      </div>
-
-      <p className="mt-4 text-sm leading-6 text-muted-foreground">{description}</p>
-    </article>
-  );
+interface FlowGalleryProps {
+  screenshots: ScreenshotCarouselSlide[];
+  ariaLabel: string;
+  className?: string;
+  autoplayMs?: number;
 }
 
-export function FlowGallery() {
+export function FlowGallery({ screenshots, ariaLabel, className, autoplayMs = 5200 }: FlowGalleryProps) {
+  const prefersReducedMotion = useReducedMotionPreference();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (screenshots.length < 2 || prefersReducedMotion) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % screenshots.length);
+    }, autoplayMs);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [autoplayMs, prefersReducedMotion, screenshots.length, activeIndex]);
+
+  useEffect(() => {
+    if (activeIndex >= screenshots.length) {
+      setActiveIndex(0);
+    }
+  }, [activeIndex, screenshots.length]);
+
+  if (screenshots.length === 0) {
+    return null;
+  }
+
+  const activeScreenshot = screenshots[activeIndex] ?? screenshots[0];
+
+  const goToIndex = (nextIndex: number) => {
+    if (screenshots.length === 0) {
+      return;
+    }
+
+    const normalizedIndex = ((nextIndex % screenshots.length) + screenshots.length) % screenshots.length;
+    setActiveIndex(normalizedIndex);
+  };
+
+  const transition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.34, ease: [0.22, 1, 0.36, 1] as const };
+
   return (
-    <div className="space-y-4">
-      <article className="surface-card surface-glow overflow-hidden bg-white/60 p-4 sm:p-5">
-        <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_12rem] sm:items-center">
-          <div>
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{featuredScreenshot.eyebrow}</p>
-            <h3 className="mt-3 max-w-[16ch] text-2xl leading-7 text-foreground">{featuredScreenshot.title}</h3>
-            <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">{featuredScreenshot.description}</p>
+    <div
+      className={cn("w-full", className)}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={ariaLabel}
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goToIndex(activeIndex - 1);
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goToIndex(activeIndex + 1);
+        }
+      }}
+    >
+      <div className="overflow-hidden rounded-[2rem] border border-white/85 bg-[#f6efe3] shadow-soft" style={{ aspectRatio: "1080 / 2424" }}>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeScreenshot.src}
+            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.99 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 1.01 }}
+            transition={transition}
+            className="relative h-full w-full"
+          >
+            <Image
+              src={activeScreenshot.src}
+              alt={activeScreenshot.alt}
+              fill
+              sizes="(min-width: 1280px) 320px, (min-width: 640px) 300px, 260px"
+              className="object-contain"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {screenshots.length > 1 ? (
+        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center justify-center gap-2 sm:justify-start">
+            <button
+              type="button"
+              onClick={() => goToIndex(activeIndex - 1)}
+              aria-label="Ver captura anterior"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand/12 bg-white/90 text-foreground shadow-soft transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-brand/40"
+            >
+              <span aria-hidden="true" className="text-lg leading-none">
+                &lt;
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => goToIndex(activeIndex + 1)}
+              aria-label="Ver siguiente captura"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand/12 bg-white/90 text-foreground shadow-soft transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-brand/40"
+            >
+              <span aria-hidden="true" className="text-lg leading-none">
+                &gt;
+              </span>
+            </button>
           </div>
 
-          <div className="mx-auto w-full max-w-[12rem] overflow-hidden rounded-[1.9rem] border border-white/80 bg-[#f6efe3] p-1 shadow-soft">
-            <Image
-              src={featuredScreenshot.image}
-              alt={featuredScreenshot.alt}
-              sizes="(min-width: 1024px) 192px, (min-width: 640px) 176px, 240px"
-              className="h-auto w-full rounded-[1.5rem]"
-            />
+          <div className="flex flex-wrap items-center justify-center gap-2 rounded-full border border-brand/12 bg-white/82 px-3 py-2 shadow-soft backdrop-blur sm:justify-end">
+            <span className="px-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              {activeIndex + 1}/{screenshots.length}
+            </span>
+
+            <div className="flex items-center gap-1.5">
+              {screenshots.map((screenshot, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <button
+                    key={screenshot.src}
+                    type="button"
+                    onClick={() => goToIndex(index)}
+                    aria-label={`Ir a la captura ${index + 1} de ${screenshots.length}`}
+                    aria-pressed={isActive}
+                    className={cn(
+                      "inline-flex h-7 w-7 items-center justify-center rounded-full transition focus-visible:ring-2 focus-visible:ring-brand/40",
+                      isActive ? "bg-brand/10" : "bg-transparent hover:bg-brand/5"
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "h-1.5 rounded-full transition-all duration-200",
+                        isActive ? "w-4 bg-brand/75" : "w-1.5 bg-brand/25"
+                      )}
+                    />
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </article>
-
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {secondaryScreenshots.map((item) => (
-          <ScreenshotFrame
-            key={item.title}
-            eyebrow={item.eyebrow}
-            title={item.title}
-            description={item.description}
-            image={item.image}
-            alt={item.alt}
-          />
-        ))}
-      </div>
+      ) : null}
     </div>
   );
 }
