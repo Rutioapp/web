@@ -130,7 +130,8 @@ export const landingContent = {
           title: "Ritmo de mañana",
           subtitle: "3 mañanas seguidas",
           tone: "light",
-          icon: "RM"
+          icon: "RM",
+          iconSrc: "/images/badges/hay-alguien-alli.png"
         },
         {
           title: "+12 XP",
@@ -172,15 +173,15 @@ export const landingContent = {
             helper: "Diseñado para arrancar en pocos pasos y mantener claridad desde el primer día.",
             screenshots: [
               {
-                src: "/images/screenshots/rutio-home-today.png",
+                src: "/images/screenshots/rutio-home-today.webp",
                 alt: "Pantalla Home Today de Rutio con hábitos del día y progreso visible."
               },
               {
-                src: "/images/screenshots/rutio-create-habit-1.png",
+                src: "/images/screenshots/rutio-create-habit-1.webp",
                 alt: "Pantalla de crear hábito de Rutio con campos de configuración inicial."
               },
               {
-                src: "/images/screenshots/rutio-create-habit-2.png",
+                src: "/images/screenshots/rutio-create-habit-2.webp",
                 alt: "Pantalla de crear hábito de Rutio con revisión final del nuevo hábito."
               }
             ]
@@ -199,27 +200,27 @@ export const landingContent = {
             helper: "Interacción pensada para mantener ritmo diario sin saturación.",
             screenshots: [
               {
-                src: "/images/screenshots/rutio-habit-detail-1.png",
+                src: "/images/screenshots/rutio-habit-detail-1.webp",
                 alt: "Pantalla de detalle de hábito de Rutio con progreso y acciones rápidas."
               },
               {
-                src: "/images/screenshots/rutio-habit-detail-2.png",
+                src: "/images/screenshots/rutio-habit-detail-2.webp",
                 alt: "Pantalla de detalle de hábito de Rutio con seguimiento y controles de avance."
               },
               {
-                src: "/images/screenshots/rutio-habit-detail-3.png",
+                src: "/images/screenshots/rutio-habit-detail-3.webp",
                 alt: "Pantalla de detalle de hábito de Rutio con información de seguimiento más completa."
               },
               {
-                src: "/images/screenshots/rutio-diary-1.png",
+                src: "/images/screenshots/rutio-diary-1.webp",
                 alt: "Pantalla de diario de Rutio con registro de hábitos y contexto del día."
               },
               {
-                src: "/images/screenshots/rutio-diary-2.png",
+                src: "/images/screenshots/rutio-diary-2.webp",
                 alt: "Pantalla de diario de Rutio con seguimiento y notas del día."
               },
               {
-                src: "/images/screenshots/rutio-diary-3.png",
+                src: "/images/screenshots/rutio-diary-3.webp",
                 alt: "Pantalla de diario de Rutio con un estado más detallado del progreso."
               }
             ]
@@ -238,11 +239,11 @@ export const landingContent = {
             helper: "Ayuda a detectar patrones y tomar decisiones con perspectiva.",
             screenshots: [
               {
-                src: "/images/screenshots/rutio-statistics-1.png",
+                src: "/images/screenshots/rutio-statistics-1.webp",
                 alt: "Pantalla de estadísticas de Rutio con consistencia semanal y progreso visual."
               },
               {
-                src: "/images/screenshots/rutio-statistics-2.png",
+                src: "/images/screenshots/rutio-statistics-2.webp",
                 alt: "Pantalla de estadísticas de Rutio con una vista alternativa de consistencia y tendencias."
               }
             ]
@@ -261,15 +262,15 @@ export const landingContent = {
             helper: "Estamos afinando esta capa para que acompañe el hábito con un tono sereno.",
             screenshots: [
               {
-                src: "/images/screenshots/rutio-gamification-1.png",
+                src: "/images/screenshots/rutio-gamification-1.webp",
                 alt: "Pantalla de gamificación de Rutio con XP, racha y progreso de recompensa."
               },
               {
-                src: "/images/screenshots/rutio-gamification-2.png",
+                src: "/images/screenshots/rutio-gamification-2.webp",
                 alt: "Pantalla de gamificación de Rutio con logros y acumulación de ámbar."
               },
               {
-                src: "/images/screenshots/rutio-gamification-3.png",
+                src: "/images/screenshots/rutio-gamification-3.webp",
                 alt: "Pantalla de gamificación de Rutio con recompensas y progresión visual."
               }
             ]

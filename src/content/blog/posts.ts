@@ -51,7 +51,7 @@ export const blogPosts: BlogPost[] = [
         "Un visual sereno en pantalla dividida que contraste una app de hábitos centrada en rachas rotas con una vista de recuperación y progreso gradual en Rutio.",
       alt: "Comparativa visual entre una app de hábitos centrada en una racha rota y una experiencia más calmada de recuperación y progreso inspirada en Rutio.",
       caption: "Los hábitos no se construyen en rachas perfectas, sino en la capacidad de volver después de fallar.",
-      imageSrc: "/images/blog/image_blog1.png"
+      imageSrc: "/images/blog/image_blog1.webp"
     },
     content: [
       {

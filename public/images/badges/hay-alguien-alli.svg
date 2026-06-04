@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="Logro Hay alguien alli">
+  <defs>
+    <linearGradient id="bg" x1="96" y1="68" x2="404" y2="444" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFDF8" />
+      <stop offset="1" stop-color="#F4EBDC" />
+    </linearGradient>
+    <linearGradient id="shadow" x1="138" y1="164" x2="352" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9C8B2" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#9B7C62" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="transparent" />
+  <path d="M131 121C150 107 175 100 203 100H309C337 100 362 107 381 121C407 140 422 171 422 206V307C422 346 401 382 368 399L301 434C286 442 269 446 256 446C243 446 226 442 211 434L144 399C111 382 90 346 90 307V206C90 171 105 140 131 121Z" fill="url(#bg)" stroke="#6B5A4D" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M148 184C165 155 193 136 225 136H287C319 136 347 155 364 184C380 212 381 247 366 276L340 327C332 342 320 355 305 363L274 379C263 385 250 388 256 388C250 388 237 385 226 379L195 363C180 355 168 342 160 327L134 276C119 247 120 212 136 184H148Z" fill="url(#shadow)"/>
+  <ellipse cx="202" cy="228" rx="14" ry="22" fill="#3C2E26"/>
+  <ellipse cx="289" cy="228" rx="14" ry="22" fill="#3C2E26"/>
+  <path d="M229 270C240 265 254 263 268 265" stroke="#3C2E26" stroke-width="10" stroke-linecap="round"/>
+  <path d="M177 297C189 290 201 288 208 289" stroke="#3C2E26" stroke-width="10" stroke-linecap="round"/>
+  <path d="M297 288C312 290 324 294 336 302" stroke="#3C2E26" stroke-width="10" stroke-linecap="round"/>
+  <rect x="169" y="280" width="61" height="112" rx="14" fill="#2E2C2A" stroke="#6B5A4D" stroke-width="8"/>
+  <circle cx="188" cy="296" r="5" fill="#F4EBDC"/>
+  <rect x="179" y="315" width="36" height="48" rx="6" fill="#45413F"/>
+  <circle cx="185" cy="321" r="3" fill="#F4EBDC" fill-opacity="0.6"/>
+  <path d="M330 78C364 78 393 101 393 132C393 158 373 180 342 188C339 189 337 192 338 195L343 214C344 218 340 221 337 219L308 202C304 200 299 200 295 201C285 204 275 205 266 205C232 205 203 182 203 153C203 111 242 78 289 78H330Z" fill="#FFF9EF" stroke="#6B5A4D" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="275" cy="140" r="10" fill="#3C2E26"/>
+  <circle cx="313" cy="140" r="10" fill="#3C2E26"/>
+  <circle cx="351" cy="140" r="10" fill="#3C2E26"/>
+</svg>
