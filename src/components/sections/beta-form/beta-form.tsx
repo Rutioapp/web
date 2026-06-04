@@ -13,6 +13,7 @@ import {
 import { submitWaitlistEntry } from "@/lib/waitlist/submit-waitlist-entry";
 import { Input } from "@/components/ui/input";
 import { BetaSuccessState } from "@/components/sections/beta-form/beta-success-state";
+import { WAITLIST_COUNT_UPDATED_EVENT } from "@/lib/counters/hero-smart-counter-service";
 
 const initialValues: BetaFormValues = {
   firstName: "",
@@ -89,6 +90,7 @@ export function BetaForm() {
 
       if (submitResult.status === "success") {
         setSubmittedName(result.data.firstName.trim() || HONEYPOT_SUCCESS_NAME);
+        window.dispatchEvent(new Event(WAITLIST_COUNT_UPDATED_EVENT));
         trackEvent({ name: "beta_waitlist_submitted", payload: { challenge: result.data.challenge, device: result.data.device } });
         return;
       }

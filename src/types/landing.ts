@@ -20,10 +20,9 @@ export interface HeroSocialProofAvatar {
 
 export interface HeroSmartCounterContent {
   title: string;
-  liveLabel: string;
-  fallbackLabel: string;
   loadingLabel: string;
-  errorHint: string;
+  zeroLabel: string;
+  fallbackLabel: string;
 }
 
 export interface HeroSocialProof {
