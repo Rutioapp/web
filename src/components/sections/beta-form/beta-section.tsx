@@ -20,11 +20,6 @@ export function BetaSection() {
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{section.description}</p>
 
-            <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-[#c9a84c]/25 bg-[#c9a84c]/8 px-4 py-2 text-sm text-foreground/70">
-              <span className="h-2 w-2 rounded-full bg-accent animate-pulse motion-reduce:animate-none" />
-              <span>{section.spotsLabel}</span>
-            </div>
-
             <div className="mt-10 max-w-xl space-y-4">
               {section.benefits.map((benefit) => (
                 <div key={benefit.label} className="flex items-center gap-3">

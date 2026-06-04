@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { landingContent } from "@/content/landing-content";
@@ -87,7 +88,7 @@ export function BetaForm() {
       const submitResult = await submitWaitlistEntry(result.data);
 
       if (submitResult.status === "success") {
-        setSubmittedName(result.data.firstName);
+        setSubmittedName(result.data.firstName.trim() || HONEYPOT_SUCCESS_NAME);
         trackEvent({ name: "beta_waitlist_submitted", payload: { challenge: result.data.challenge, device: result.data.device } });
         return;
       }
@@ -158,6 +159,7 @@ export function BetaForm() {
           maxLength={254}
           autoComplete="email"
           inputMode="email"
+          required
           disabled={isSubmitting}
           onChange={(event) => updateField("email", event.target.value)}
           error={errors.email}
@@ -232,16 +234,34 @@ export function BetaForm() {
           name="consent"
           type="checkbox"
           checked={values.consent}
+          required
           disabled={isSubmitting}
           onChange={(event) => updateField("consent", event.target.checked)}
           className="mt-1 h-4 w-4 rounded border-line text-brand focus:ring-brand/40"
           aria-invalid={errors.consent ? true : undefined}
           aria-describedby={errors.consent ? "consent-error" : undefined}
         />
-        <div>
+        <div className="space-y-1">
           <label htmlFor="consent" className="text-sm leading-6 text-muted-foreground">
             {formContent.fields.consent}
           </label>
+          <p className="text-xs leading-5 text-muted-foreground">
+            <span>Consulta la </span>
+            <Link
+              href={formContent.consentLinks[0].href}
+              className="font-medium text-foreground underline decoration-foreground/30 underline-offset-2 transition-colors hover:text-brand"
+            >
+              {formContent.consentLinks[0].label}
+            </Link>
+            <span> y los </span>
+            <Link
+              href={formContent.consentLinks[1].href}
+              className="font-medium text-foreground underline decoration-foreground/30 underline-offset-2 transition-colors hover:text-brand"
+            >
+              {formContent.consentLinks[1].label}
+            </Link>
+            <span>.</span>
+          </p>
           {errors.consent ? <p id="consent-error" className="mt-1 text-sm text-red-600">{errors.consent}</p> : null}
         </div>
       </div>

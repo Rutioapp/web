@@ -8,10 +8,9 @@ export interface HeroSmartCounterSnapshot {
 
 /**
  * Isolated adapter for the hero smart counter data source.
- * Return null to let the UI use its static fallback content.
+ * Phase 3: replace this with the real Supabase waitlist signup count.
+ * Return null to keep Phase 2 free of backend counter logic.
  */
 export async function fetchHeroSmartCounterSnapshot(): Promise<HeroSmartCounterSnapshot | null> {
-  // TODO: connect this adapter to the project's future Supabase/API endpoint.
-  // Keep this function contract unchanged so the UI component stays untouched.
   return null;
 }

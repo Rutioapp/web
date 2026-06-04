@@ -49,7 +49,6 @@ export function GamificationSection() {
                   key={metric.title}
                   className={index === section.metrics.length - 1 ? "flex gap-4" : "flex gap-4 border-b border-brand/12 pb-7"}
                 >
-                  <span className="w-12 flex-shrink-0 font-display text-[1.9rem] font-light leading-none text-[#c9a84c]/55">{metric.shortLabel}</span>
                   <div>
                     <h3 className="text-2xl leading-7 text-foreground">{metric.title}</h3>
                     <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-[0.95rem]">{metric.description}</p>

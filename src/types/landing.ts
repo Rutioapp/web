@@ -20,18 +20,15 @@ export interface HeroSocialProofAvatar {
 
 export interface HeroSmartCounterContent {
   title: string;
-  fallbackValue: number;
-  metricLabel: string;
-  contextLabel: string;
+  liveLabel: string;
+  fallbackLabel: string;
   loadingLabel: string;
-  fallbackHint: string;
   errorHint: string;
 }
 
 export interface HeroSocialProof {
-  detail: string;
   counter: HeroSmartCounterContent;
-  avatars: HeroSocialProofAvatar[];
+  avatars: HeroSocialProofAvatar[]; 
 }
 
 export interface HeroHabitPreview {
@@ -151,7 +148,6 @@ export interface RewardItem {
 }
 
 export interface GamificationMetric {
-  shortLabel: string;
   title: string;
   description: string;
 }
@@ -200,6 +196,7 @@ export interface BetaFormContent {
     lastName: string;
     email: string;
   };
+  consentLinks: NavLink[];
   challengeOptions: SelectOption[];
   deviceOptions: SelectOption[];
   submitLabel: string;
@@ -210,7 +207,6 @@ export interface BetaFormContent {
 }
 
 export interface BetaContent extends SectionIntro {
-  spotsLabel: string;
   benefits: BetaBenefit[];
   form: BetaFormContent;
 }

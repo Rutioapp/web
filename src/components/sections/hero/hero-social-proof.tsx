@@ -21,9 +21,8 @@ export function HeroSocialProof() {
           </span>
         ))}
       </div>
-      <div className="grid flex-1 gap-3 lg:grid-cols-[minmax(0,19.5rem)_minmax(0,1fr)] lg:items-center">
+      <div className="flex-1 lg:max-w-[19.5rem]">
         <HeroSmartCounter content={socialProof.counter} />
-        <p className="text-sm leading-6 text-muted-foreground">{socialProof.detail}</p>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@
 import { siteConfig } from "@/config/site";
 
 export const landingContent = {
-  announcement: "Beta privada 2026 · Acceso anticipado con plazas limitadas.",
+  announcement: "Beta privada 2026 · Acceso anticipado por oleadas.",
   nav: {
     links: [
       { label: "Cómo funciona", href: "/#como-funciona" },
@@ -49,15 +49,12 @@ export const landingContent = {
       }
     ],
     socialProof: {
-      detail: "Abrimos acceso por cupos para mantener una beta cuidada y aprender de cada tanda.",
       counter: {
-        title: "Referencia de beta",
-        fallbackValue: 30,
-        metricLabel: "rutinas iniciadas",
-        contextLabel: "en la beta privada",
-        loadingLabel: "Actualizando referencia de la beta",
-        fallbackHint: "Valor de referencia mientras finalizamos la integración del contador.",
-        errorHint: "Mostrando un valor de referencia estable."
+        title: "Beta privada",
+        liveLabel: "Personas apuntándose a la beta",
+        fallbackLabel: "Beta privada en preparación",
+        loadingLabel: "Preparando la referencia de la beta",
+        errorHint: "Mostrando el estado actual de la beta."
       },
       avatars: [
         { name: "Alba M.", initials: "A", color: "122 158 126" },
@@ -299,19 +296,16 @@ export const landingContent = {
       },
       metrics: [
         {
-          shortLabel: "VIS",
           title: "Constancia visible",
           description:
             "Detecta patrones semanales y mensuales de un vistazo para entender qué sostienes de verdad."
         },
         {
-          shortLabel: "FAM",
           title: "Equilibrio por familias",
           description:
             "Comprueba si tu energía está repartida entre mente, cuerpo, emocional, social y foco profesional."
         },
         {
-          shortLabel: "XP",
           title: "Motivación calmada",
           description:
             "Suma XP, niveles y logros discretos. Recompensas pequeñas que celebran progreso real sin convertirlo en presión."
@@ -324,20 +318,19 @@ export const landingContent = {
       highlight: "privada.",
       description:
         "Solicita acceso anticipado, comparte tu contexto y ayúdanos a pulir una experiencia de hábitos más calmada y útil.",
-      spotsLabel: "Acceso por plazas limitadas · iOS primero",
       benefits: [
         { label: "Acceso anticipado a la experiencia completa" },
         { label: "500 ámbar de bienvenida" },
         { label: "Feedback directo con el equipo de producto" }
       ],
       form: {
-        title: "Reserva tu plaza",
-        subtitle: "Te avisamos cuando tu invitación esté lista. Sin spam, solo lo que importa.",
+        title: "Solicita acceso",
+        subtitle: "Te avisamos cuando tu invitación esté lista. Abrimos nuevas plazas progresivamente, sin spam.",
         fields: {
-          firstName: "Nombre",
-          lastName: "Apellido",
+          firstName: "Nombre (opcional)",
+          lastName: "Apellido (opcional)",
           email: "Email",
-          challenge: "¿Cuál es tu mayor reto?",
+          challenge: "¿Cuál es tu mayor reto? (opcional)",
           device: "Dispositivo",
           consent: "Acepto recibir novedades y actualizaciones de Rutio por email. Puedes darte de baja cuando quieras."
         },
@@ -346,6 +339,10 @@ export const landingContent = {
           lastName: "Apellido",
           email: "tu@email.com"
         },
+        consentLinks: [
+          { label: "Política de privacidad", href: "/privacy" },
+          { label: "Términos de uso", href: "/terms" }
+        ],
         challengeOptions: [
           { value: "mente", label: "ME Mente — constancia intelectual" },
           { value: "espiritu", label: "ES Espíritu — meditación y calma" },

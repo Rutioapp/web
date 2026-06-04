@@ -1,5 +1,5 @@
 interface BetaSuccessStateProps {
-  name: string;
+  name?: string;
   title: string;
   description: string;
   actionLabel: string;
@@ -7,6 +7,8 @@ interface BetaSuccessStateProps {
 }
 
 export function BetaSuccessState({ name, title, description, actionLabel, onReset }: BetaSuccessStateProps) {
+  const shouldShowName = Boolean(name && name !== "Gracias");
+
   return (
     <div className="rounded-[1.75rem] border border-success/20 bg-success/10 p-6 sm:p-7">
       <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-success/15 text-lg text-success">
@@ -14,7 +16,7 @@ export function BetaSuccessState({ name, title, description, actionLabel, onRese
       </span>
       <h3 className="mt-4 text-2xl leading-8 text-foreground">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-muted-foreground">
-        {name}, {description}
+        {shouldShowName ? `${name}, ${description}` : description}
       </p>
       <button
         type="button"

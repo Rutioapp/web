@@ -55,6 +55,10 @@ function isDuplicateEmailError(error: PostgrestError) {
 
 function toWaitlistInsertPayload(values: BetaFormValues): WaitlistSignupInsert {
   const fullName = `${values.firstName.trim()} ${values.lastName.trim()}`.trim();
+  const messageParts = [
+    values.challenge.trim() ? `challenge:${values.challenge.trim()}` : null,
+    `device:${values.device.trim()}`
+  ].filter((part): part is string => Boolean(part));
   const locale = typeof navigator !== "undefined" ? truncate(navigator.language, 32) : null;
   const userAgent = typeof navigator !== "undefined" ? truncate(navigator.userAgent, 512) : null;
 
@@ -62,7 +66,7 @@ function toWaitlistInsertPayload(values: BetaFormValues): WaitlistSignupInsert {
     email: values.email,
     name: fullName ? truncate(fullName, WAITLIST_FIELD_LIMITS.firstName + WAITLIST_FIELD_LIMITS.lastName + 1) : null,
     source: truncate(WAITLIST_SOURCE, WAITLIST_FIELD_LIMITS.source),
-    message: truncate(`challenge:${values.challenge.trim()};device:${values.device.trim()}`, WAITLIST_FIELD_LIMITS.message),
+    message: truncate(messageParts.join(";"), WAITLIST_FIELD_LIMITS.message),
     locale,
     user_agent: userAgent
   };
