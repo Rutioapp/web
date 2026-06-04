@@ -21,7 +21,7 @@ const initialValues: BetaFormValues = {
   email: "",
   challenge: "",
   device: "",
-  consent: true
+  consent: false
 };
 
 type FieldErrors = Partial<Record<keyof BetaFormValues, string>>;
@@ -248,7 +248,7 @@ export function BetaForm() {
             {formContent.fields.consent}
           </label>
           <p className="text-xs leading-5 text-muted-foreground">
-            <span>Consulta la </span>
+            <span>Puedes darte de baja cuando quieras. Consulta también la </span>
             <Link
               href={formContent.consentLinks[0].href}
               className="font-medium text-foreground underline decoration-foreground/30 underline-offset-2 transition-colors hover:text-brand"

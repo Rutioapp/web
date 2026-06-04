@@ -364,7 +364,7 @@ export const landingContent = {
           email: "Email",
           challenge: "¿Cuál es tu mayor reto? (opcional)",
           device: "Dispositivo",
-          consent: "Acepto recibir novedades y actualizaciones de Rutio por email. Puedes darte de baja cuando quieras."
+          consent: "Acepto recibir novedades sobre la beta de Rutio por email y confirmo que he leído la Política de privacidad."
         },
         placeholders: {
           firstName: "Tu nombre",
@@ -390,7 +390,7 @@ export const landingContent = {
           { value: "both", label: "Ambos" }
         ],
         submitLabel: "Unirme a la beta privada",
-        note: "Recibirás un email de confirmación al apuntarte. Tu acceso será personal e intransferible.",
+        note: "Te avisaremos por email cuando abramos nuevas plazas de la beta.",
         successTitle: "Tu solicitud ya está guardada.",
         successDescription: "Cuando abramos la siguiente ola de invitaciones, te avisaremos por email.",
         successAction: "Enviar otra solicitud"
