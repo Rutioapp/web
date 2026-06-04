@@ -95,11 +95,9 @@ export interface SectionIntro {
   description: string;
 }
 
-export interface GalleryPlaceholder {
-  eyebrow: string;
-  title: string;
-  description: string;
-  height: "sm" | "md" | "lg";
+export interface HowItWorksScreenshot {
+  src: string;
+  alt: string;
 }
 
 export interface HowItWorksStep {
@@ -112,20 +110,13 @@ export interface HowItWorksStep {
     title: string;
     description: string;
     helper: string;
-    screenshot?: {
-      asset: "diario" | "estadisticas" | "mensual" | "semanal";
-      alt: string;
-    };
+    screenshots?: HowItWorksScreenshot[];
   };
   note?: string;
 }
 
 export interface HowItWorksContent extends SectionIntro {
   steps: HowItWorksStep[];
-  gallery: {
-    primary: GalleryPlaceholder;
-    secondary: GalleryPlaceholder[];
-  };
 }
 
 export interface FamilyItem {

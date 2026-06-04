@@ -1,13 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image, { type StaticImageData } from "next/image";
 import { useId, useMemo, useRef, useState } from "react";
 
-import diarioScreenshot from "@/assets/screenshots/diario.jpeg";
-import estadisticasScreenshot from "@/assets/screenshots/estadisticas.jpeg";
-import mensualScreenshot from "@/assets/screenshots/mensual.jpeg";
-import semanalScreenshot from "@/assets/screenshots/semanal.jpeg";
+import { FlowGallery } from "@/components/sections/how-it-works/flow-gallery";
 import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
@@ -31,13 +27,6 @@ interface HowItWorksStep {
 
 const stepIds = ["create", "track", "stats", "streak"] as const;
 
-const howItWorksScreenshots: Record<NonNullable<HowItWorksContentStep["visual"]["screenshot"]>["asset"], StaticImageData> = {
-  diario: diarioScreenshot,
-  estadisticas: estadisticasScreenshot,
-  mensual: mensualScreenshot,
-  semanal: semanalScreenshot
-};
-
 const howItWorksSteps: HowItWorksStep[] = landingContent.sections.howItWorks.steps.map((step, index) => ({
   id: stepIds[index] ?? `step-${index + 1}`,
   stepLabel: step.number,
@@ -48,25 +37,25 @@ const howItWorksSteps: HowItWorksStep[] = landingContent.sections.howItWorks.ste
 }));
 
 function StepVisualCard({ step }: { step: HowItWorksStep }) {
-  const screenshot = step.visual.screenshot ? howItWorksScreenshots[step.visual.screenshot.asset] : null;
-
   return (
-    <div className="mt-6 rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
-      <div className="mx-auto flex min-h-[14rem] max-w-[18rem] flex-col rounded-[2.1rem] border border-brand/15 bg-white/78 p-5 shadow-soft sm:min-h-[14.5rem] sm:max-w-[19rem] sm:p-6">
-        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{step.visual.badge}</p>
-        <h4 className="mt-3 text-lg leading-6 text-foreground">{step.visual.title}</h4>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.visual.description}</p>
-        {screenshot ? (
-          <div className="mx-auto mt-4 w-full max-w-[10.75rem] overflow-hidden rounded-[1.6rem] border border-white/90 bg-[#f6efe3] p-1 shadow-soft">
-            <Image
-              src={screenshot}
-              alt={step.visual.screenshot?.alt ?? ""}
-              sizes="(min-width: 1024px) 172px, 180px"
-              className="h-auto w-full rounded-[1.25rem]"
-            />
-          </div>
-        ) : null}
-        <p className="mt-auto pt-4 text-xs leading-5 text-muted-foreground/90">{step.visual.helper}</p>
+    <div className="mt-5 rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
+      <div className="rounded-[1.85rem] border border-brand/12 bg-white/82 p-4 shadow-soft sm:p-5">
+        <div className="flex items-start justify-between gap-3">
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{step.visual.badge}</p>
+          <span className="rounded-full border border-brand/15 bg-white/85 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            Paso {step.stepLabel}
+          </span>
+        </div>
+
+        <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.visual.description}</p>
+
+        <FlowGallery
+          screenshots={step.visual.screenshots ?? []}
+          ariaLabel={`${step.title} - capturas de pantalla`}
+          className="mt-4 mx-auto max-w-[16.5rem] sm:max-w-[17.75rem] lg:max-w-[18.25rem]"
+        />
+
+        <p className="mt-4 text-xs leading-5 text-muted-foreground/90">{step.visual.helper}</p>
       </div>
     </div>
   );
@@ -82,10 +71,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
     () => howItWorksSteps.findIndex((step) => step.id === activeStepId),
     [activeStepId]
   );
-  const activeStep = useMemo(
-    () => howItWorksSteps[activeIndex] ?? howItWorksSteps[0],
-    [activeIndex]
-  );
+  const activeStep = useMemo(() => howItWorksSteps[activeIndex] ?? howItWorksSteps[0], [activeIndex]);
 
   const focusTab = (index: number) => {
     if (howItWorksSteps.length === 0) return;
@@ -117,7 +103,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
   if (!activeStep) return null;
 
   return (
-    <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-14 xl:gap-16">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-start lg:gap-14 xl:gap-16">
       <div>
         <p className="mb-5 flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-brand-strong">
           <span className="h-px w-6 bg-brand/80" />
@@ -224,7 +210,6 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
                               ))}
                             </div>
                           </div>
-
                         </div>
                       </motion.div>
                     ) : null}
@@ -276,13 +261,9 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
                 ))}
               </div>
             </div>
-
           </motion.section>
         </AnimatePresence>
       </div>
     </div>
   );
 }
-
-
-
