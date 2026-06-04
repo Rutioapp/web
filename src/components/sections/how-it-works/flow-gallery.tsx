@@ -1,9 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { OptimizedPublicImage } from "@/components/ui/optimized-public-image";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -91,11 +91,11 @@ export function FlowGallery({ screenshots, ariaLabel, className, autoplayMs = 52
             transition={transition}
             className="relative h-full w-full"
           >
-            <Image
+            <OptimizedPublicImage
               src={activeScreenshot.src}
               alt={activeScreenshot.alt}
               fill
-              sizes="(min-width: 1280px) 320px, (min-width: 640px) 300px, 260px"
+              sizes="(min-width: 1280px) 320px, (min-width: 1024px) 300px, (min-width: 640px) 280px, 260px"
               className="object-contain"
             />
           </motion.div>

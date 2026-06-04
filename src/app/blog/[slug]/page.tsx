@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
@@ -11,6 +8,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { OptimizedPublicImage } from "@/components/ui/optimized-public-image";
 import { siteConfig } from "@/config/site";
 import { absoluteUrl } from "@/lib/utils";
 import { formatBlogDate, getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
@@ -35,39 +33,14 @@ function getInlineVisualInsertionIndex(placement: BlogVisual["placement"], total
   return Math.max(1, totalSections - 1);
 }
 
-function resolveExistingPublicImageSrc(imageSrc?: string) {
-  if (!imageSrc) {
-    return null;
-  }
-
-  const normalizedPath = imageSrc.replace(/^\//, "");
-  const absolutePath = join(process.cwd(), "public", normalizedPath);
-
-  if (existsSync(absolutePath)) {
-    return imageSrc;
-  }
-
-  if (imageSrc.endsWith(".webp")) {
-    const pngSrc = imageSrc.replace(/\.webp$/, ".png");
-    const pngAbsolutePath = join(process.cwd(), "public", pngSrc.replace(/^\//, ""));
-
-    if (existsSync(pngAbsolutePath)) {
-      return pngSrc;
-    }
-  }
-
-  return null;
-}
-
 function BlogVisualFigure({ visual }: { visual: BlogVisual }) {
-  const resolvedImageSrc = resolveExistingPublicImageSrc(visual.imageSrc);
-  const hasRealImage = Boolean(resolvedImageSrc);
+  const hasRealImage = Boolean(visual.imageSrc);
 
   return (
     <figure className="my-8 overflow-hidden rounded-[1.65rem] border border-border/80 bg-white/70">
       {hasRealImage ? (
-        <Image
-          src={resolvedImageSrc as string}
+        <OptimizedPublicImage
+          src={visual.imageSrc as string}
           alt={visual.alt}
           width={1440}
           height={900}
@@ -140,7 +113,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const visual = post.visual;
   const inlineVisualInsertionIndex = visual ? getInlineVisualInsertionIndex(visual.placement, post.content.length) : null;
-  const visualHasImage = Boolean(visual && resolveExistingPublicImageSrc(visual.imageSrc));
+  const visualHasImage = Boolean(visual && visual.imageSrc);
   const canRenderVisual = Boolean(visual && (visualHasImage || post.draft));
 
   const shouldRenderVisualAfterTitle = canRenderVisual && visual?.placement === "after-title";

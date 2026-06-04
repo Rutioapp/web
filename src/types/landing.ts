@@ -56,6 +56,7 @@ export interface HeroFloatingBadge {
   subtitle: string;
   tone: "light" | "dark";
   icon?: string;
+  iconSrc?: string;
   dotColor?: string;
 }
 

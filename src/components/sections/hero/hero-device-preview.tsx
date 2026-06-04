@@ -1,11 +1,9 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
-import diarioScreenshot from "@/assets/screenshots/diario.jpeg";
-import semanalScreenshot from "@/assets/screenshots/semanal.jpeg";
 import { HeroAchievementBadge } from "@/components/sections/hero/hero-achievement-badge";
+import { OptimizedPublicImage } from "@/components/ui/optimized-public-image";
 import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 
@@ -24,9 +22,11 @@ export function HeroDevicePreview() {
       >
         <div className="mx-auto mb-4 h-1.5 w-24 rounded-full bg-foreground/10" />
         <div className="relative overflow-hidden rounded-[2rem] bg-[#faf6ef] shadow-inset">
-          <Image
-            src={diarioScreenshot}
-            alt="Pantalla diaria de Rutio con lista de hábitos para completar."
+          <OptimizedPublicImage
+            src="/images/screenshots/rutio-home-today.webp"
+            alt="Pantalla Home Today de Rutio con hábitos del día y progreso visible."
+            width={1080}
+            height={2424}
             priority
             sizes="(min-width: 1024px) 304px, (min-width: 640px) 288px, 272px"
             className="h-auto w-full"
@@ -43,9 +43,11 @@ export function HeroDevicePreview() {
         className="absolute right-0 top-[11%] z-10 w-[10.8rem] rounded-[2rem] border border-white/70 bg-white/35 p-2 shadow-float backdrop-blur sm:w-[12.2rem]"
       >
         <div className="overflow-hidden rounded-[1.5rem] border border-white/80 bg-[#f6efe3]">
-          <Image
-            src={semanalScreenshot}
-            alt="Pantalla semanal de Rutio con seguimiento de hábitos durante la semana."
+          <OptimizedPublicImage
+            src="/images/screenshots/rutio-statistics-1.webp"
+            alt="Pantalla de estadísticas de Rutio con consistencia semanal y progreso visual."
+            width={1080}
+            height={2424}
             sizes="(min-width: 1024px) 195px, 172px"
             className="h-auto w-full"
           />
@@ -62,9 +64,8 @@ export function HeroDevicePreview() {
         className="absolute left-0 top-[56%] z-30 max-w-[12.2rem]"
       >
         <HeroAchievementBadge
-          title={devicePanel.floatingBadges[0]?.title ?? "Logro desbloqueado"}
-          subtitle={devicePanel.floatingBadges[0]?.subtitle ?? "Tu constancia se mantiene"}
           iconLabel={devicePanel.floatingBadges[0]?.icon}
+          iconSrc={devicePanel.floatingBadges[0]?.iconSrc}
         />
       </motion.div>
 

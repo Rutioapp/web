@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-import Image from "next/image";
 import Link from "next/link";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { OptimizedPublicImage } from "@/components/ui/optimized-public-image";
 import { siteConfig } from "@/config/site";
 import { formatBlogDate, getPublishedBlogPosts } from "@/lib/blog";
 import { cn } from "@/lib/utils";
@@ -31,30 +29,6 @@ const topicCards = [
   }
 ] as const;
 
-function resolveExistingPublicImageSrc(imageSrc?: string) {
-  if (!imageSrc) {
-    return null;
-  }
-
-  const normalizedPath = imageSrc.replace(/^\//, "");
-  const absolutePath = join(process.cwd(), "public", normalizedPath);
-
-  if (existsSync(absolutePath)) {
-    return imageSrc;
-  }
-
-  if (imageSrc.endsWith(".webp")) {
-    const pngSrc = imageSrc.replace(/\.webp$/, ".png");
-    const pngAbsolutePath = join(process.cwd(), "public", pngSrc.replace(/^\//, ""));
-
-    if (existsSync(pngAbsolutePath)) {
-      return pngSrc;
-    }
-  }
-
-  return null;
-}
-
 export const metadata: Metadata = {
   title: "Blog",
   description: "Reflexiones sobre habitos, constancia y como construimos Rutio.",
@@ -74,13 +48,13 @@ export const metadata: Metadata = {
 
 function HeroVisualImage() {
   return (
-    <div className="relative min-h-[280px] overflow-hidden rounded-[1.75rem] border border-brand/12 bg-surface-strong sm:min-h-[340px]">
-      <Image
-        src="/images/blog/blog-hero-rutio-preview.png"
+    <div className="relative overflow-hidden rounded-[1.75rem] border border-brand/12 bg-surface-strong" style={{ aspectRatio: "1672 / 941" }}>
+      <OptimizedPublicImage
+        src="/images/blog/blog-hero-rutio-preview.webp"
         alt="Vista previa de Rutio sobre una escena editorial calida con libreta y lapiz"
         fill
         priority
-        sizes="(min-width: 1024px) 36vw, (min-width: 640px) 88vw, 92vw"
+        sizes="(min-width: 1280px) 460px, (min-width: 1024px) 42vw, (min-width: 640px) 88vw, 92vw"
         className="object-cover object-center"
       />
     </div>
@@ -98,9 +72,7 @@ export default function BlogPage() {
           <section className="overflow-hidden rounded-[1.85rem] border border-brand/12 bg-surface shadow-soft">
             <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.84fr)] lg:items-stretch lg:gap-8 lg:p-8">
               <div className="flex flex-col justify-center">
-                <p className="eyebrow w-fit">
-                  Blog de Rutio
-                </p>
+                <p className="eyebrow w-fit">Blog de Rutio</p>
                 <h1 className="mt-4 max-w-[18ch] text-balance text-[2.1rem] leading-[1.02] sm:text-[3rem]">
                   Reflexiones sobre habitos, constancia y como construimos Rutio.
                 </h1>
@@ -147,7 +119,7 @@ export default function BlogPage() {
             {publishedPosts.length > 0 ? (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {publishedPosts.map((post) => {
-                  const coverImageSrc = resolveExistingPublicImageSrc(post.visual?.imageSrc);
+                  const coverImageSrc = post.visual?.imageSrc;
 
                   return (
                     <Link
@@ -157,11 +129,11 @@ export default function BlogPage() {
                     >
                       {coverImageSrc ? (
                         <div className="relative h-28 overflow-hidden rounded-[1.1rem] border border-white/70">
-                          <Image
+                          <OptimizedPublicImage
                             src={coverImageSrc}
                             alt={post.visual?.alt ?? post.title}
                             fill
-                            sizes="(min-width: 1024px) 22vw, (min-width: 640px) 44vw, 92vw"
+                            sizes="(min-width: 1280px) 320px, (min-width: 1024px) 28vw, (min-width: 640px) 44vw, 92vw"
                             className="object-cover"
                           />
                         </div>
