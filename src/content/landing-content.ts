@@ -170,12 +170,11 @@ export const landingContent = {
           description:
             "Elige un hábito concreto, define su seguimiento y ubícalo en una familia para que encaje en tu rutina desde el inicio.",
           visual: {
-            badge: "Captura pendiente",
+            badge: "Flujo guiado",
             title: "Alta de hábito guiada",
-            description: "Mostrará nombre, familia, tipo de seguimiento y frecuencia semanal.",
-            helper: "Visual final: creación breve, clara y sin pasos innecesarios."
-          },
-          note: "Placeholder para la captura final de creación de hábito."
+            description: "Definición breve de nombre, familia, seguimiento y frecuencia para empezar sin fricción.",
+            helper: "Diseñado para arrancar en pocos pasos y mantener claridad desde el primer día."
+          }
         },
         {
           number: "02",
@@ -184,10 +183,14 @@ export const landingContent = {
           description:
             "Registra en segundos hábitos tipo check o de conteo desde Today, sin menús largos ni ruido.",
           visual: {
-            badge: "Captura pendiente",
+            badge: "Pantalla real",
             title: "Registro rápido en Today",
-            description: "Mostrará acciones de completar y ajustar conteos desde una sola vista.",
-            helper: "Visual final: interacción directa y ritmo calmado."
+            description: "Acciones directas para completar hábitos y ajustar progreso desde una única vista.",
+            helper: "Interacción pensada para mantener ritmo diario sin saturación.",
+            screenshot: {
+              asset: "diario",
+              alt: "Pantalla diaria de Rutio con hábitos organizados y acciones rápidas de seguimiento."
+            }
           }
         },
         {
@@ -197,10 +200,14 @@ export const landingContent = {
           description:
             "Observa días, semanas, familias y rachas en vistas limpias para detectar patrones y ajustar con criterio.",
           visual: {
-            badge: "Captura pendiente",
+            badge: "Pantalla real",
             title: "Semana y mes en contexto",
-            description: "Mostrará días completados, pausas y equilibrio entre familias activas.",
-            helper: "Visual final: lectura rápida de consistencia real."
+            description: "Lectura clara de progreso, rachas y equilibrio por familias activas.",
+            helper: "Ayuda a detectar patrones y tomar decisiones con perspectiva.",
+            screenshot: {
+              asset: "estadisticas",
+              alt: "Pantalla de estadísticas de Rutio con consistencia semanal y progreso visual."
+            }
           }
         },
         {
@@ -210,10 +217,10 @@ export const landingContent = {
           description:
             "Suma XP, niveles y logros discretos que celebran pequeños avances y sostienen la continuidad.",
           visual: {
-            badge: "Captura pendiente",
+            badge: "En evolución",
             title: "XP, nivel y logro del día",
-            description: "Mostrará progreso de nivel y un logro desbloqueado sin saturar la pantalla.",
-            helper: "Visual final: recompensa sutil para volver mañana."
+            description: "Recompensas sutiles para reforzar la continuidad sin convertir la experiencia en presión.",
+            helper: "Estamos afinando esta capa para que acompañe el hábito con un tono sereno."
           }
         }
       ],
@@ -311,49 +318,13 @@ export const landingContent = {
         }
       ]
     },
-    testimonials: {
-      eyebrow: "Beta testers",
-      title: "Primeros en el",
-      highlight: "camino.",
-      description: "Primeras impresiones de personas que están construyendo consistencia con Rutio.",
-      items: [
-        {
-          quote: "Por fin una app que no me hace sentir culpable cuando fallo un día. Me ayuda a retomar sin drama.",
-          author: "Alba M.",
-          role: "Diseñadora UX · 28 años",
-          initials: "A",
-          color: "122 158 126"
-        },
-        {
-          quote: "Los XP y los logros están bien medidos. Motivan sin convertir el hábito en una competición constante.",
-          author: "Marc T.",
-          role: "Emprendedor · 31 años",
-          initials: "M",
-          color: "184 137 90"
-        },
-        {
-          quote: "El diario integrado me ayuda a entender por qué cumplo más en unas semanas que en otras.",
-          author: "Laura G.",
-          role: "Psicóloga · 25 años",
-          initials: "L",
-          color: "91 143 168"
-        }
-      ],
-      lifestylePlaceholder: {
-        eyebrow: "Foto lifestyle",
-        title: "Rutio en un momento cálido y real",
-        description:
-          "Persona usando Rutio en un ambiente natural, luz suave y una sensación mindful. Sin estética stock de fondo blanco.",
-        height: "md"
-      }
-    },
     beta: {
       eyebrow: "Beta privada",
       title: "Únete a la beta",
       highlight: "privada.",
       description:
         "Solicita acceso anticipado, comparte tu contexto y ayúdanos a pulir una experiencia de hábitos más calmada y útil.",
-      spotsLabel: "Solo 200 plazas disponibles · iOS primero",
+      spotsLabel: "Acceso por plazas limitadas · iOS primero",
       benefits: [
         { label: "Acceso anticipado a la experiencia completa" },
         { label: "500 ámbar de bienvenida" },

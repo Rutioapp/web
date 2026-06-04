@@ -116,6 +116,10 @@ export interface HowItWorksStep {
     title: string;
     description: string;
     helper: string;
+    screenshot?: {
+      asset: "diario" | "estadisticas" | "mensual" | "semanal";
+      alt: string;
+    };
   };
   note?: string;
 }
@@ -169,19 +173,6 @@ export interface GamificationContent extends SectionIntro {
     caption: string;
   };
   metrics: GamificationMetric[];
-}
-
-export interface TestimonialItem {
-  quote: string;
-  author: string;
-  role: string;
-  initials: string;
-  color: string;
-}
-
-export interface TestimonialsContent extends SectionIntro {
-  items: TestimonialItem[];
-  lifestylePlaceholder: GalleryPlaceholder;
 }
 
 export interface BetaBenefit {
@@ -243,7 +234,6 @@ export interface LandingContent {
     howItWorks: HowItWorksContent;
     families: FamiliesContent;
     gamification: GamificationContent;
-    testimonials: TestimonialsContent;
     beta: BetaContent;
     faq: SectionIntro;
   };

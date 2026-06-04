@@ -6,7 +6,6 @@ import { GamificationSection } from "@/components/sections/gamification/gamifica
 import { HeroSection } from "@/components/sections/hero/hero-section";
 import { HowItWorksSection } from "@/components/sections/how-it-works/how-it-works-section";
 import { MarqueeSection } from "@/components/sections/marquee/marquee-section";
-import { TestimonialsSection } from "@/components/sections/testimonials/testimonials-section";
 
 export default function HomePage() {
   return (
@@ -18,7 +17,6 @@ export default function HomePage() {
         <HowItWorksSection />
         <FamiliesSection />
         <GamificationSection />
-        <TestimonialsSection />
         <BetaSection />
       </main>
       <Footer />
