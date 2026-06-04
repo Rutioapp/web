@@ -1,8 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image, { type StaticImageData } from "next/image";
 import { useId, useMemo, useRef, useState } from "react";
 
+import diarioScreenshot from "@/assets/screenshots/diario.jpeg";
+import estadisticasScreenshot from "@/assets/screenshots/estadisticas.jpeg";
+import mensualScreenshot from "@/assets/screenshots/mensual.jpeg";
+import semanalScreenshot from "@/assets/screenshots/semanal.jpeg";
 import { landingContent } from "@/content/landing-content";
 import { useReducedMotionPreference } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
@@ -22,10 +27,16 @@ interface HowItWorksStep {
   title: string;
   description: string;
   visual: HowItWorksContentStep["visual"];
-  note?: string;
 }
 
 const stepIds = ["create", "track", "stats", "streak"] as const;
+
+const howItWorksScreenshots: Record<NonNullable<HowItWorksContentStep["visual"]["screenshot"]>["asset"], StaticImageData> = {
+  diario: diarioScreenshot,
+  estadisticas: estadisticasScreenshot,
+  mensual: mensualScreenshot,
+  semanal: semanalScreenshot
+};
 
 const howItWorksSteps: HowItWorksStep[] = landingContent.sections.howItWorks.steps.map((step, index) => ({
   id: stepIds[index] ?? `step-${index + 1}`,
@@ -33,17 +44,28 @@ const howItWorksSteps: HowItWorksStep[] = landingContent.sections.howItWorks.ste
   eyebrow: step.eyebrow,
   title: step.title,
   description: step.description,
-  visual: step.visual,
-  note: step.note
+  visual: step.visual
 }));
 
 function StepVisualCard({ step }: { step: HowItWorksStep }) {
+  const screenshot = step.visual.screenshot ? howItWorksScreenshots[step.visual.screenshot.asset] : null;
+
   return (
     <div className="mt-6 rounded-[2rem] bg-gradient-to-b from-white/55 to-[#f5efe4] p-3 sm:p-4">
-      <div className="mx-auto flex min-h-[14rem] max-w-[18rem] flex-col rounded-[2.1rem] border border-dashed border-brand/25 bg-white/70 p-5 shadow-soft sm:min-h-[14.5rem] sm:max-w-[19rem] sm:p-6">
+      <div className="mx-auto flex min-h-[14rem] max-w-[18rem] flex-col rounded-[2.1rem] border border-brand/15 bg-white/78 p-5 shadow-soft sm:min-h-[14.5rem] sm:max-w-[19rem] sm:p-6">
         <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-strong">{step.visual.badge}</p>
         <h4 className="mt-3 text-lg leading-6 text-foreground">{step.visual.title}</h4>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.visual.description}</p>
+        {screenshot ? (
+          <div className="mx-auto mt-4 w-full max-w-[10.75rem] overflow-hidden rounded-[1.6rem] border border-white/90 bg-[#f6efe3] p-1 shadow-soft">
+            <Image
+              src={screenshot}
+              alt={step.visual.screenshot?.alt ?? ""}
+              sizes="(min-width: 1024px) 172px, 180px"
+              className="h-auto w-full rounded-[1.25rem]"
+            />
+          </div>
+        ) : null}
         <p className="mt-auto pt-4 text-xs leading-5 text-muted-foreground/90">{step.visual.helper}</p>
       </div>
     </div>
@@ -109,7 +131,7 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
 
         <p className="mt-5 max-w-xl text-pretty text-base leading-8 text-muted-foreground">{description}</p>
 
-        <div className="mt-10 lg:pr-2 xl:pr-4" role="tablist" aria-label="Pasos de cómo funciona Rutio" aria-orientation="vertical">
+        <div className="mt-10 lg:pr-2 xl:pr-4" role="tablist" aria-label="Pasos de como funciona Rutio" aria-orientation="vertical">
           <div className="flex flex-col gap-3">
             {howItWorksSteps.map((step, index) => {
               const isActive = step.id === activeStep.id;
@@ -203,7 +225,6 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
                             </div>
                           </div>
 
-                          {step.note ? <p className="mt-4 text-sm leading-6 text-muted-foreground">{step.note}</p> : null}
                         </div>
                       </motion.div>
                     ) : null}
@@ -256,12 +277,12 @@ export function HowItWorksTabs({ eyebrow, title, highlight, description }: HowIt
               </div>
             </div>
 
-            {activeStep.note ? <p className="mt-4 text-sm leading-6 text-muted-foreground">{activeStep.note}</p> : null}
           </motion.section>
         </AnimatePresence>
       </div>
     </div>
   );
 }
+
 
 
