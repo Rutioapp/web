@@ -80,13 +80,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     title: post.title,
     description: post.description,
     alternates: {
-      canonical: canonicalPath
+      canonical: absoluteUrl(canonicalPath)
     },
     openGraph: {
       type: "article",
       title: post.title,
       description: post.description,
-      url: canonicalPath,
+      url: absoluteUrl(canonicalPath),
       publishedTime: post.date,
       modifiedTime: post.updatedAt ?? post.date
     },

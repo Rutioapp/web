@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 
 import { PageShell } from "@/components/layout/page-shell";
 import { siteConfig } from "@/config/site";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Terminos y Condiciones",
   description: "Condiciones de uso del sitio web de Rutio, waitlist beta y app en desarrollo.",
   alternates: {
-    canonical: siteConfig.links.legal.terms
+    canonical: absoluteUrl(siteConfig.links.legal.terms)
   }
 };
 

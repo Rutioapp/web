@@ -15,7 +15,7 @@ export const defaultMetadata: Metadata = {
   description: defaultDescription,
   applicationName: siteConfig.name,
   alternates: {
-    canonical: "/"
+    canonical: siteConfig.url
   },
   openGraph: {
     type: "website",

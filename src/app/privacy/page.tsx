@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 
 import { PageShell } from "@/components/layout/page-shell";
 import { siteConfig } from "@/config/site";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Politica de Privacidad",
   description: "Como Rutio trata los datos del sitio web, la waitlist y la app en fase alpha/beta.",
   alternates: {
-    canonical: siteConfig.links.legal.privacy
+    canonical: absoluteUrl(siteConfig.links.legal.privacy)
   }
 };
 

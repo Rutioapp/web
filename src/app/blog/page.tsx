@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/container";
 import { OptimizedPublicImage } from "@/components/ui/optimized-public-image";
 import { siteConfig } from "@/config/site";
 import { formatBlogDate, getPublishedBlogPosts } from "@/lib/blog";
-import { cn } from "@/lib/utils";
+import { absoluteUrl, cn } from "@/lib/utils";
 
 const topicCards = [
   {
@@ -33,12 +33,12 @@ export const metadata: Metadata = {
   title: "Blog",
   description: "Reflexiones sobre habitos, constancia y como construimos Rutio.",
   alternates: {
-    canonical: "/blog"
+    canonical: absoluteUrl("/blog")
   },
   openGraph: {
     title: "Blog de Rutio",
     description: "Reflexiones sobre habitos, constancia y como construimos Rutio.",
-    url: "/blog"
+    url: absoluteUrl("/blog")
   },
   twitter: {
     title: "Blog de Rutio",
