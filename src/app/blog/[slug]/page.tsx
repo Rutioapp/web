@@ -75,9 +75,24 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const canonicalPath = `/blog/${post.slug}`;
+  const ogImage = post.visual?.imageSrc
+    ? [
+        {
+          url: absoluteUrl(post.visual.imageSrc),
+          alt: post.visual.alt
+        }
+      ]
+    : [
+        {
+          ...siteConfig.metadata.ogImage,
+          url: absoluteUrl(siteConfig.metadata.ogImage.url)
+        }
+      ];
 
   return {
-    title: post.title,
+    title: {
+      absolute: post.title
+    },
     description: post.description,
     alternates: {
       canonical: absoluteUrl(canonicalPath)
@@ -87,12 +102,16 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.title,
       description: post.description,
       url: absoluteUrl(canonicalPath),
+      siteName: siteConfig.name,
       publishedTime: post.date,
-      modifiedTime: post.updatedAt ?? post.date
+      ...(post.updatedAt ? { modifiedTime: post.updatedAt } : {}),
+      images: ogImage
     },
     twitter: {
+      card: "summary_large_image",
       title: post.title,
-      description: post.description
+      description: post.description,
+      images: [post.visual?.imageSrc ? absoluteUrl(post.visual.imageSrc) : absoluteUrl(siteConfig.metadata.ogImage.url)]
     },
     robots: post.draft
       ? {
@@ -124,9 +143,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.updatedAt ?? post.date,
-    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    ...(post.updatedAt ? { dateModified: post.updatedAt } : {}),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": absoluteUrl(`/blog/${post.slug}`)
+    },
     url: absoluteUrl(`/blog/${post.slug}`),
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,

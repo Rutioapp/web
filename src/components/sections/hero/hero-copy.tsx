@@ -1,4 +1,6 @@
-﻿import { landingContent } from "@/content/landing-content";
+import Link from "next/link";
+
+import { landingContent } from "@/content/landing-content";
 import { HeroSocialProof } from "@/components/sections/hero/hero-social-proof";
 import { buttonVariants } from "@/components/ui/button";
 import { InPageLink } from "@/components/ui/in-page-link";
@@ -13,7 +15,10 @@ export function HeroCopy() {
         <span className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-brand-strong">{hero.eyebrow}</span>
       </div>
 
-      <h1 id="hero-heading" className="text-balance font-display text-[3.2rem] font-light leading-[0.92] text-foreground sm:text-[4.4rem] lg:text-[4.95rem] xl:text-[5.2rem]">
+      <h1
+        id="hero-heading"
+        className="text-balance font-display text-[3.2rem] font-light leading-[0.92] text-foreground sm:text-[4.4rem] lg:text-[4.95rem] xl:text-[5.2rem]"
+      >
         <span className="block">{hero.titleLead}</span>
         <span className="block">
           {hero.titleAccentPrefix} <em className="font-normal italic text-brand">{hero.titleAccent}</em>
@@ -37,6 +42,16 @@ export function HeroCopy() {
           <span>{hero.secondaryCta.label}</span>
           <span aria-hidden="true">→</span>
         </InPageLink>
+      </div>
+
+      <div className="mt-4">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Leer el blog
+          <span aria-hidden="true">→</span>
+        </Link>
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-3 sm:items-stretch lg:gap-4" id="hero-foundations">

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -30,19 +29,31 @@ const topicCards = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Reflexiones sobre habitos, constancia y como construimos Rutio.",
+  title: {
+    absolute: "Blog de Rutio - hábitos, progreso visual y producto"
+  },
+  description: "Artículos sobre hábitos sostenibles, progreso visual y decisiones de producto en Rutio.",
   alternates: {
     canonical: absoluteUrl("/blog")
   },
   openGraph: {
-    title: "Blog de Rutio",
-    description: "Reflexiones sobre habitos, constancia y como construimos Rutio.",
-    url: absoluteUrl("/blog")
+    type: "website",
+    title: "Blog de Rutio - hábitos, progreso visual y producto",
+    description: "Artículos sobre hábitos sostenibles, progreso visual y decisiones de producto en Rutio.",
+    url: absoluteUrl("/blog"),
+    siteName: siteConfig.name,
+    images: [
+      {
+        ...siteConfig.metadata.ogImage,
+        url: absoluteUrl(siteConfig.metadata.ogImage.url)
+      }
+    ]
   },
   twitter: {
-    title: "Blog de Rutio",
-    description: "Reflexiones sobre habitos, constancia y como construimos Rutio."
+    card: "summary_large_image",
+    title: "Blog de Rutio - hábitos, progreso visual y producto",
+    description: "Artículos sobre hábitos sostenibles, progreso visual y decisiones de producto en Rutio.",
+    images: [absoluteUrl(siteConfig.metadata.ogImage.url)]
   }
 };
 
@@ -181,8 +192,7 @@ export default function BlogPage() {
             </div>
           </section>
         </Container>
-      </main>
-      <Footer />
+    </main>
     </>
   );
 }
