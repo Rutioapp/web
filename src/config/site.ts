@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "Rutio",
   description:
     "Rutio te ayuda a crear habitos sostenibles, visualizar tu progreso y mantener la motivacion con una gamificacion calmada.",
-  url: "https://rutio.app",
+  url: "https://www.rutioapp.com",
   locale: "es_ES",
   footer: {
     summary:
