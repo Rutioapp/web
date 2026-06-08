@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -192,7 +193,8 @@ export default function BlogPage() {
             </div>
           </section>
         </Container>
-    </main>
+      </main>
+      <Footer />
     </>
   );
 }
